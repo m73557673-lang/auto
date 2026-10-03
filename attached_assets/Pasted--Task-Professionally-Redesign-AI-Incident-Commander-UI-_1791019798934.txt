@@ -1,0 +1,197 @@
+# Task: Professionally Redesign AI Incident Commander UI and Remove Duplicate Navigation
+
+Act as a senior UI/UX designer and frontend engineer specializing in professional SaaS platforms, Site Reliability Engineering (SRE) dashboards, observability tools, and AI-powered incident management systems.
+
+## 1. First, inspect the existing project
+
+Before making changes, inspect the current frontend, routes, components, CSS, API services, and backend integration.
+
+The application is an **AI Incident Commander** that monitors services, detects failures, creates incidents, uses Gemini AI for incident analysis, and provides an AI chatbot for troubleshooting.
+
+The current UI has a major problem: **there appear to be two dashboards or two competing navigation areas.** This makes the application confusing and unprofessional.
+
+Identify exactly where the duplicate dashboard, sidebar, navigation bar, dashboard heading, or dashboard content is being rendered. Determine whether the duplication comes from nested layouts, duplicated components, or separate navigation implementations.
+
+Do not assume the cause. Inspect the actual code and fix the root cause.
+
+## 2. Remove the duplicate dashboard and navigation
+
+This is a mandatory requirement.
+
+* Keep exactly ONE main application shell.
+* Keep exactly ONE primary sidebar/navigation system.
+* Keep exactly ONE dashboard page and dashboard heading.
+* Remove the redundant dashboard, duplicate sidebar, extra navigation bar, or repeated navigation elements.
+* Do not render a second sidebar inside individual pages.
+* Do not display duplicate page titles, breadcrumb rows, top bars, or dashboard metric sections.
+* Ensure the main content is rendered only once inside the shared application layout.
+* Avoid nested dashboard layouts that duplicate navigation.
+* Preserve all existing routes and make every remaining navigation item work.
+* Ensure the selected navigation item accurately reflects the current page.
+* Ensure browser refresh works on all supported routes.
+
+**Expected result:** A clean, single application layout with one sidebar, one main content area, and no duplicated dashboard elements.
+
+## 3. Redesign the visual experience
+
+Create a polished, production-quality enterprise SaaS interface inspired by modern observability and incident-response products.
+
+### Visual direction
+
+* Professional, minimal, modern, and trustworthy.
+* Light theme with a subtle neutral background.
+* White or near-white content cards.
+* Dark, high-contrast typography.
+* Restrained blue or indigo accent color.
+* Green for healthy services, amber for warnings, and red for critical incidents.
+* Consistent spacing, typography, border radii, shadows, and alignment.
+* Use a consistent icon library already installed in the project where possible.
+* Avoid excessive gradients, oversized headings, unnecessary animations, and decorative elements that reduce readability.
+* Avoid a generic AI-generated dashboard appearance.
+
+### Application layout
+
+Design a single, consistent shell containing:
+
+**Left sidebar**
+
+* AI Incident Commander logo and product name.
+* Overview
+* Live Monitoring
+* Incidents
+* Services
+* Logs Explorer, if supported
+* Reports and Analytics, if supported
+* AI Assistant
+* Settings, if supported
+
+Only include navigation destinations that exist or can be properly implemented using the current project architecture. Do not add fake pages or dead links.
+
+The sidebar should have consistent icons, readable labels, a clear active state, and a professional collapsed mode if practical.
+
+**Top header**
+
+* Current page title and optional breadcrumb.
+* Global service or environment selector only if supported by the existing application.
+* Connection or monitoring status based on actual backend data.
+* User or settings controls only if they have a real purpose.
+
+Do not create another dashboard header or another navigation bar inside the page.
+
+**Main content**
+
+* One consistent content container.
+* Responsive page width and spacing.
+* Clear separation between page headings, filters, summaries, and content.
+* No horizontal overflow at common desktop, tablet, and mobile widths.
+
+## 4. Improve the Overview dashboard
+
+Make the Overview page easy to understand at a glance.
+
+Use a clear information hierarchy:
+
+1. Page heading: Overview.
+2. A compact summary of service health and active incidents.
+3. Key metric cards, such as:
+
+   * Total monitored services.
+   * Healthy services.
+   * Active incidents.
+   * Mean time to resolution, only if the backend provides reliable data for it.
+4. Service health or incident trend visualization only when real data is available.
+5. Recent incidents with severity, affected service, status, and timestamps.
+6. A clear shortcut to investigate an active incident.
+
+Use real API data wherever the application already provides it. Include loading, empty, and error states.
+
+Do not invent monitoring statistics, fake incidents, fabricated uptime percentages, or artificial charts. If a metric is unavailable, omit it or clearly identify it as unavailable.
+
+## 5. Improve incident management
+
+Make the incident workflow professional and easy to scan.
+
+* Use consistent severity badges for critical, high, medium, and low incidents, matching the application's actual severity model.
+* Display incident title, affected service, current status, creation time, and relevant event details.
+* Make active and resolved incidents visually distinguishable.
+* Improve the incident details layout with clear sections for summary, evidence, timeline, root-cause analysis, and resolution.
+* Show the AI analysis action clearly.
+* Display loading, failure, retry, and successful analysis states.
+* Present evidence and hypotheses in readable cards or sections rather than large unstructured text blocks.
+* Do not claim an incident has been resolved merely because AI generated a recommendation.
+
+## 6. Improve the Gemini AI assistant
+
+The chatbot should look like a professional troubleshooting assistant integrated into the incident-management interface.
+
+* Use a clean conversation layout with distinguishable user and assistant messages.
+* Make the message composer comfortable to use.
+* Add clear sending, loading, and error states.
+* Support long responses with readable typography, lists, and code formatting where appropriate.
+* Show which incident is being discussed when the assistant is incident-specific.
+* Preserve the existing backend conversation and persistence behavior.
+* Do not expose Gemini API keys, backend tokens, or other secrets in browser code.
+* Do not fabricate AI responses or silently replace failed requests with fake success messages.
+
+## 7. Improve typography, components, and accessibility
+
+Establish a consistent design system for:
+
+* Page headings and section headings.
+* Body text, metadata, and timestamps.
+* Buttons and button states.
+* Inputs, search fields, and filters.
+* Cards, tables, and status badges.
+* Empty states, error messages, loading indicators, and tooltips.
+
+Use accessible color contrast, keyboard-accessible controls, visible focus states, descriptive labels, and semantic HTML.
+
+Avoid emoji as substitutes for professional interface icons.
+
+## 8. Preserve functionality
+
+This is a redesign of an existing application, not a rebuild from scratch.
+
+* Preserve the existing React and TypeScript architecture unless a genuine technical issue requires a change.
+* Preserve the FastAPI backend and existing API endpoints.
+* Preserve Gemini integration and the three-key configuration/fallback behavior.
+* Preserve incident creation, monitoring, service health checks, analysis persistence, chat history, and incident resolution behavior.
+* Keep API communication through the existing frontend service layer and configured backend proxy.
+* Do not hardcode API keys, backend tokens, fake metrics, or mock incident data.
+* Do not remove working functionality just to simplify the UI.
+* Do not replace working backend features with frontend-only demonstrations.
+* Do not change environment configuration or dependencies unnecessarily.
+
+## 9. Implementation and validation
+
+Work directly in the existing repository.
+
+First identify and remove the duplicate layout. Then refactor the shared application shell, improve the styling, and refine each existing page without breaking functionality.
+
+After implementing the redesign:
+
+1. Run the production frontend build.
+2. Run the existing backend test suite if the environment supports it.
+3. Fix any build or test regressions introduced by your changes.
+4. Verify all existing routes and navigation items.
+5. Verify the application contains only one sidebar and one dashboard layout.
+6. Verify that API-backed metrics and incident information still load.
+7. Verify that AI analysis and chat still call the real backend.
+8. Check responsive behavior at desktop, tablet, and mobile widths.
+9. Report the files changed, tests executed, and any remaining issues honestly.
+
+Do not claim a test passed unless you actually ran it.
+
+## Acceptance criteria
+
+The work is complete only when:
+
+* The duplicate dashboard/navigation is removed.
+* Exactly one shared application shell is visible.
+* The UI looks polished, consistent, and enterprise-ready.
+* The overview, incidents, monitoring, and AI assistant remain functional.
+* Existing backend and Gemini integration are preserved.
+* No fake metrics, broken routes, exposed secrets, or duplicated components remain.
+* The production frontend build succeeds.
+
+Prioritize clarity, consistency, and usability over adding more features. Inspect the actual project and implement the changes rather than returning only a design proposal.
