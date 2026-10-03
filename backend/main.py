@@ -16,18 +16,33 @@ from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request, sta
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from backend.ai_service import GeminiAnalysisService, GeminiProviderError, GeminiResponseError
-from backend.config import Settings
-from backend.database import Database, utc_now
-from backend.monitor import CheckResult, MonitorService
-from backend.schemas import (
-    IncidentAnalysisRequest,
-    IncidentAnalysisResponse,
-    IncidentChatMessage,
-    IncidentChatRequest,
-    IncidentChatResponse,
-    MonitoringEventIn,
-)
+try:
+    from backend.ai_service import GeminiAnalysisService, GeminiProviderError, GeminiResponseError
+    from backend.config import Settings
+    from backend.database import Database, utc_now
+    from backend.monitor import CheckResult, MonitorService
+    from backend.schemas import (
+        IncidentAnalysisRequest,
+        IncidentAnalysisResponse,
+        IncidentChatMessage,
+        IncidentChatRequest,
+        IncidentChatResponse,
+        MonitoringEventIn,
+    )
+except ImportError:
+    from ai_service import GeminiAnalysisService, GeminiProviderError, GeminiResponseError
+    from config import Settings
+    from database import Database, utc_now
+    from monitor import CheckResult, MonitorService
+    from schemas import (
+        IncidentAnalysisRequest,
+        IncidentAnalysisResponse,
+        IncidentChatMessage,
+        IncidentChatRequest,
+        IncidentChatResponse,
+        MonitoringEventIn,
+    )
+
 
 
 class JsonFormatter(logging.Formatter):

@@ -73,7 +73,7 @@ class Settings:
         origins = tuple(
             origin.strip()
             for origin in os.getenv(
-                "CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
+                "CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173,http://localhost:5000,http://127.0.0.1:5000,*"
             ).split(",")
             if origin.strip()
         )
@@ -87,8 +87,9 @@ class Settings:
         gemini_model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash").strip() or "gemini-2.5-flash"
         gemini_timeout_seconds = _positive_float("GEMINI_TIMEOUT_SECONDS", 30.0)
 
+        default_db_path = "/tmp/incidents.sqlite3" if os.getenv("VERCEL") else str(BACKEND_DIR / "data" / "incidents.sqlite3")
         return cls(
-            database_path=Path(os.getenv("DATABASE_PATH", str(BACKEND_DIR / "data" / "incidents.sqlite3"))),
+            database_path=Path(os.getenv("DATABASE_PATH", default_db_path)),
             monitor_target_url=target_url,
             service_name=os.getenv("MONITOR_SERVICE_NAME", "Target application").strip() or "Target application",
             monitor_enabled=enabled,

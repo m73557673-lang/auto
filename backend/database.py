@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sqlite3
 import uuid
 from contextlib import contextmanager
@@ -114,6 +115,80 @@ class Database:
                     ON incident_chat_messages(incident_id, conversation_id, created_at);
                 """
             )
+        if os.getenv("VERCEL"):
+            self.seed_initial_incidents_if_empty()
+
+
+    def seed_initial_incidents_if_empty(self) -> None:
+        with self.connection() as connection:
+            count = connection.execute("SELECT count(*) FROM incidents").fetchone()[0]
+            if count > 0:
+                return
+            now = iso_timestamp(utc_now())
+            sample_incidents = [
+                (
+                    "inc-auth-9021",
+                    "OAuth 2.0 Token Verification Failures",
+                    "Auth service returning HTTP 500 on token introspect due to Redis session cache timeout",
+                    "Authentication Service",
+                    "critical",
+                    "active",
+                    now,
+                    now,
+                    None,
+                    500,
+                    3200.0,
+                    "Redis connection pool timeout during session lookup",
+                ),
+                (
+                    "inc-pay-81720",
+                    "Payment Provider Upstream 504 Timeout",
+                    "Upstream credit card processor gateway timeout >5000ms",
+                    "Payment Gateway",
+                    "critical",
+                    "active",
+                    now,
+                    now,
+                    None,
+                    504,
+                    5400.0,
+                    "HTTP 504 Gateway Timeout from external acquiring bank",
+                ),
+                (
+                    "inc-srch-38190",
+                    "Search Elasticsearch Cluster High Memory & Latency",
+                    "Catalog query latency degraded to 2800ms due to unoptimized wildcard aggregations",
+                    "Catalog Search API",
+                    "high",
+                    "active",
+                    now,
+                    now,
+                    None,
+                    503,
+                    2850.0,
+                    "CircuitBreakerException: Data too large, JVM heap at 98.4%",
+                ),
+            ]
+            connection.executemany(
+                """INSERT OR IGNORE INTO incidents
+                   (id, title, summary, service, severity, status, first_detected, last_observed, resolved_at, last_http_status, last_response_time_ms, error_details)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                sample_incidents,
+            )
+            sample_events = [
+                ("inc-auth-9021", "opened", now, "Incident opened after 3 failed token validation health checks.", 500, 3200.0, "Redis connection pool timeout"),
+                ("inc-auth-9021", "failure_observed", now, "Redis cluster node failover in progress; elevated latency observed.", 500, 3100.0, "Node 10.0.4.12 unresponsive"),
+                ("inc-pay-81720", "opened", now, "Payment processing health probes exceeding 5000ms threshold.", 504, 5400.0, "Gateway timeout"),
+                ("inc-pay-81720", "failure_observed", now, "High rate of checkout drop-offs detected on credit card transactions.", 504, 5200.0, "Upstream timeout"),
+                ("inc-srch-38190", "opened", now, "Elasticsearch JVM heap memory usage spiked above 95%.", 503, 2850.0, "CircuitBreakerException"),
+            ]
+            connection.executemany(
+                """INSERT INTO incident_events
+                   (incident_id, event_type, observed_at, summary, http_status, response_time_ms, error_details)
+                   VALUES (?, ?, ?, ?, ?, ?, ?)""",
+                sample_events,
+            )
+
 
     def health(self) -> bool:
         with self.connection() as connection:

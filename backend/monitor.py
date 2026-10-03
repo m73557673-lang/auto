@@ -13,8 +13,13 @@ import aiohttp
 import httpx
 from aiohttp.abc import AbstractResolver, ResolveResult
 
-from backend.config import Settings
-from backend.database import Database
+try:
+    from backend.config import Settings
+    from backend.database import Database
+except ImportError:
+    from config import Settings
+    from database import Database
+
 
 logger = logging.getLogger("commander.monitor")
 
