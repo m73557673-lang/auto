@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"inverse-surface":"#2d3133","inverse-on-surface":"#eff1f3","inverse-primary":"#b4c5ff","surface-container-low":"#f2f4f6","surface-variant":"#e0e3e5","surface-bright":"#f7f9fb","surface-container-high":"#e6e8ea","surface-dim":"#d8dadc","surface-container-lowest":"#ffffff","secondary-fixed-dim":"#c0c6db","tertiary":"#46566c","tertiary-container":"#5e6e85","on-secondary":"#ffffff","secondary":"#575e70","background":"#f7f9fb","primary-container":"#2563eb","on-error-container":"#93000a","surface-container-highest":"#e0e3e5","on-surface":"#191c1e","surface-container":"#eceef0","secondary-container":"#d9dff5","on-background":"#191c1e","on-tertiary":"#ffffff","outline-variant":"#c3c6d7","on-surface-variant":"#434655","on-primary-fixed":"#00174b","error-container":"#ffdad6","on-tertiary-fixed-variant":"#38485d","on-secondary-container":"#5c6274","primary":"#004ac6","on-secondary-fixed":"#141b2b","tertiary-fixed-dim":"#b7c8e1","on-tertiary-fixed":"#0b1c30","surface":"#f7f9fb","on-primary":"#ffffff","on-primary-fixed-variant":"#003ea8","outline":"#737686","on-primary-container":"#eeefff","on-error":"#ffffff","primary-fixed-dim":"#b4c5ff","error":"#ba1a1a","primary-fixed":"#dbe1ff","secondary-fixed":"#dce2f7","on-tertiary-container":"#e9f0ff","surface-tint":"#0053db","on-secondary-fixed-variant":"#404758","tertiary-fixed":"#d3e4fe"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-xl":"1.5rem","space-sm":"0.5rem","space-md":"0.75rem","margin-desktop":"2rem","gutter":"1rem","space-xs":"0.25rem","space-lg":"1rem","gutter-desktop":"1.5rem","margin":"1rem"},fontFamily:{"body-md":["Inter"],"headline-lg":["Inter"],"code-md":["JetBrains Mono"],"body-lg":["Inter"],"body-sm":["Inter"],"headline-xl":["Inter"],"code-sm":["JetBrains Mono"],"headline-sm":["Inter"],"label-sm":["Inter"],"label-md":["Inter"],"headline-md":["Inter"]},fontSize:{"body-md":["13px",{"lineHeight":"20px","fontWeight":"400"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"code-md":["12px",{"lineHeight":"18px","fontWeight":"400"}],"body-lg":["15px",{"lineHeight":"24px","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"headline-xl":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"600"}],"code-sm":["11px",{"lineHeight":"16px","fontWeight":"500"}],"headline-sm":["15px",{"lineHeight":"22px","letterSpacing":"-0.005em","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.02em","fontWeight":"500"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"500"}],"headline-md":["18px",{"lineHeight":"26px","letterSpacing":"-0.01em","fontWeight":"600"}]}}}}</script></head><body class="bg-background font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-space-lg flex items-center justify-between bg-surface-container-lowest"><div class="flex items-center gap-space-sm"><img alt="AI Incident Commander Shield Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WZAIKVfAqmGte4qqiWnLSY4J7f2gacTOJ85k8AuAyEQDW1HgNGkmPyldSZm7IXZcQWuP6WMnzvveK7gmGx2JOB5Fd_Cy6SthKB9YC2guzte4u8b21832krNaI0OhFTvwrmMrJenvhDDOtm72rbxGpPiwMdUrD7Jwbi5WL9HYVmj-eMdFQF3E_aAcE7zQP_eSVIq-9HvIpkH81yu0Y8cjDqg9QDcaGz3hN6yylnPodiCkZxTNd7gDIY2Rc"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight leading-none">Commander</span><span class="font-code-sm text-code-sm text-secondary leading-tight">SRE Suite</span></div></div><span class="px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold tracking-wide uppercase">ENTERPRISE</span></div><div class="px-space-lg py-space-sm"><div class="px-space-md py-space-xs rounded-lg bg-surface-container flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-md text-label-md text-on-surface font-medium">Production</span></div><span class="material-symbols-outlined text-outline text-[16px]">unfold_more</span></div></div><nav class="flex-1 px-space-md py-space-xs space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-medium rounded-lg"><a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm transition-colors bg-primary-container text-on-primary-container font-medium rounded-lg" data-path="overview" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[18px]">grid_view</span><span class="font-body-md text-body-md">Overview</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="incidents" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[18px]">warning</span><span class="font-body-md text-body-md">Incidents</span></div><span class="px-1.5 py-0.5 rounded-full bg-error-container text-on-error-container font-code-sm text-code-sm font-semibold">3</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="services" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[18px]">dns</span><span class="font-body-md text-body-md">Services</span></div><span class="font-code-sm text-code-sm text-secondary">12</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="live-logs" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[18px]">terminal</span><span class="font-body-md text-body-md">Live Logs</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="ai-investigations" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[18px]">psychology</span><span class="font-body-md text-body-md">AI Investigations</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="ai-assistant" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[18px]">auto_awesome</span><span class="font-body-md text-body-md">AI Assistant</span></div><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reports" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[18px]">insert_chart</span><span class="font-body-md text-body-md">Reports</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="settings" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[18px]">tune</span><span class="font-body-md text-body-md">Settings</span></div></a></nav></div><div class="p-space-md bg-surface-container-low"><div class="p-space-sm rounded-xl bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)] flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="relative"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHDh9QiFcPIwF8vQ4DfChmSsHhNoz8RuIv1MVgxShKuDm7x__Mm5UcCdszQPuKL4oM0yI-U5HgQIdjW0S-o2DBWjdKi9YpbNLGTtUxmA559nqZ-70Id9LXcRloGJQEuqjSzm09AVzSwC1wMTzV191YlCtcwm9BJa6HANoC_l2nSpZa9HjMsMbOaQ-kgbwJ3KKj7o-5iX52TC4CGLJLO2J8me0ZgO-SvsyGNFQam8WJrO-HwJ9_r9q9ng"/><span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-primary-container ring-2 ring-surface-container-lowest"></span></div><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-surface font-semibold truncate">Elena Rostova</span><span class="font-code-sm text-code-sm text-secondary truncate">Staff Incident Lead</span></div></div><div class="flex items-center"><button class="p-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">logout</span></button></div></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md"><nav class="hidden md:flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm"><span class="hover:text-on-surface cursor-pointer">Workspace</span><span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span><span class="hover:text-on-surface cursor-pointer font-medium text-on-surface">Production US-East</span></nav><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container text-on-surface"><span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span><span class="font-label-sm text-label-sm font-medium">Live Mesh</span></div></div><div class="flex items-center gap-space-md"><div class="relative hidden sm:flex items-center"><span class="material-symbols-outlined absolute left-3 text-[18px] text-outline">search</span><input class="w-72 pl-9 pr-12 py-1.5 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface placeholder-secondary focus:outline-none focus:ring-1 focus:ring-primary-container" placeholder="Search incidents, services, logs..." type="text"/><span class="absolute right-2 px-1.5 py-0.5 rounded bg-surface-container-high font-code-sm text-code-sm text-secondary">⌘K</span></div><div class="flex items-center gap-space-xs"><div class="px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container"></span><span class="font-label-sm text-label-sm font-semibold">Monitoring Active</span></div><button class="relative p-space-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-error text-on-error font-code-sm text-[10px] font-bold">2</span></button><button class="p-space-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">help</span></button><div class="ml-space-xs pl-space-xs border-l border-surface-variant"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHDh9QiFcPIwF8vQ4DfChmSsHhNoz8RuIv1MVgxShKuDm7x__Mm5UcCdszQPuKL4oM0yI-U5HgQIdjW0S-o2DBWjdKi9YpbNLGTtUxmA559nqZ-70Id9LXcRloGJQEuqjSzm09AVzSwC1wMTzV191YlCtcwm9BJa6HANoC_l2nSpZa9HjMsMbOaQ-kgbwJ3KKj7o-5iX52TC4CGLJLO2J8me0ZgO-SvsyGNFQam8WJrO-HwJ9_r9q9ng"/></div></div></div></header><main class="relative pt-16 min-h-screen bg-background w-full px-space-lg"><div class="flex flex-col w-full pb-12">
+<!-- Top Global Action Bar / Breadcrumb Metadata Strip -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-lg">
+<div>
+<div class="flex items-center gap-space-xs text-secondary font-code-sm text-code-sm mb-1">
+<span>CLUSTER: US-EAST-1</span>
+<span>/</span>
+<span class="text-primary font-semibold">INCIDENT ENGINE v4.2</span>
+<span>/</span>
+<span class="inline-flex items-center gap-1 text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+          REALTIME STREAM
+        </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">System Overview</h1>
+<p class="font-body-md text-body-md text-secondary mt-0.5">
+        Monitor your applications, investigate incidents, and understand system health in real-time.
+      </p>
+</div>
+<!-- Controls -->
+<div class="flex flex-wrap items-center gap-space-sm self-start md:self-auto">
+<button class="inline-flex items-center gap-space-xs px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface shadow-sm font-label-md text-label-md hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">calendar_today</span>
+<span>Last 24 Hours</span>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_drop_down</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface shadow-sm font-label-md text-label-md hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">file_download</span>
+<span>Export Summary</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-3.5 py-1.5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-md hover:opacity-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">notifications_active</span>
+<span>View Active Incidents (3)</span>
+</button>
+</div>
+</div>
+<!-- Incident Status Warning Banner -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm mb-space-lg">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-error"></div>
+<div class="p-space-lg flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md min-w-0">
+<div class="p-2 rounded-lg bg-error-container text-on-error-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">warning</span>
+</div>
+<div class="min-w-0">
+<div class="flex flex-wrap items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Degraded System State Detected — 1 Critical, 2 High Priority Incidents Active</h2>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-code-sm text-code-sm font-semibold">P0 CRITICAL</span>
+</div>
+<p class="font-body-md text-body-md text-secondary mt-1">
+            Payment Service and Database pool experiencing elevated failure rates. Last telemetry ingestion updated 42s ago.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<div class="hidden sm:flex flex-col text-right font-code-sm text-code-sm text-secondary">
+<span>MTTR TARGET: &lt;15m</span>
+<span class="text-error font-medium">SLO AT RISK: 99.82%</span>
+</div>
+<button class="inline-flex items-center gap-space-xs px-3.5 py-2 rounded-lg bg-error text-on-error font-label-md text-label-md font-semibold shadow-sm hover:opacity-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">crisis_alert</span>
+<span>Open Incident Command Center</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 4 Metric Summary Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-lg">
+<!-- Metric 1: Active Incidents -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-secondary font-medium uppercase tracking-wide">Active Incidents</span>
+<span class="p-1.5 rounded-lg bg-error-container text-on-error-container">
+<span class="material-symbols-outlined text-[18px]">report_problem</span>
+</span>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">3</span>
+<span class="px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-code-sm text-code-sm font-semibold">+1 in last hr</span>
+</div>
+<div class="mt-3 flex items-center justify-between text-secondary font-body-sm text-body-sm">
+<span>1 Critical / 2 High</span>
+<span class="font-code-sm text-code-sm text-error">Unhealthy</span>
+</div>
+</div>
+<!-- Metric 2: Services Monitored -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-secondary font-medium uppercase tracking-wide">Services Monitored</span>
+<span class="p-1.5 rounded-lg bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px]">dns</span>
+</span>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">12</span>
+<span class="px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container font-code-sm text-code-sm font-semibold">Active</span>
+</div>
+<div class="mt-3 flex items-center justify-between text-secondary font-body-sm text-body-sm">
+<span>Across 3 environments</span>
+<span class="font-code-sm text-code-sm text-on-surface">10/12 Stable</span>
+</div>
+</div>
+<!-- Metric 3: Error Rate -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-secondary font-medium uppercase tracking-wide">Error Rate</span>
+<span class="p-1.5 rounded-lg bg-surface-container-highest text-on-surface">
+<span class="material-symbols-outlined text-[18px]">troubleshoot</span>
+</span>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-error font-bold tracking-tight">2.4%</span>
+<span class="px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-code-sm text-code-sm font-semibold">+1.1% spike</span>
+</div>
+<div class="mt-3 flex items-center justify-between text-secondary font-body-sm text-body-sm">
+<span>Last 60 minutes</span>
+<span class="font-code-sm text-code-sm text-secondary">Norm: 0.12%</span>
+</div>
+</div>
+<!-- Metric 4: Mean Time to Resolve -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-secondary font-medium uppercase tracking-wide">MTTR (Mean Time)</span>
+<span class="p-1.5 rounded-lg bg-surface-container-low text-primary">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+</span>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-on-surface font-bold tracking-tight">18 min</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface font-code-sm text-code-sm font-semibold">-4m vs avg</span>
+</div>
+<div class="mt-3 flex items-center justify-between text-secondary font-body-sm text-body-sm">
+<span>Average over last 7 days</span>
+<span class="font-code-sm text-code-sm text-primary font-medium">94.2% AI Aided</span>
+</div>
+</div>
+</div>
+<!-- Bento Section: AI System Insights + Error Rate Chart -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md mb-space-lg">
+<!-- AI System Insights Card (Visually distinctive premium card) -->
+<div class="lg:col-span-6 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between relative overflow-hidden">
+<!-- Accent Top Indicator -->
+<div class="h-1 w-full bg-primary-container"></div>
+<div class="p-space-lg flex-1">
+<!-- AI Card Header -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-md pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">psychology</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">AI System Insights</h3>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-code-sm text-code-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+              High Confidence (94%)
+            </span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-code-sm text-code-sm text-secondary">
+              Claude 3.5 Sonnet / SRE Engine
+            </span>
+</div>
+</div>
+<!-- Body Summary -->
+<div class="p-space-md rounded-lg bg-surface-container-low mb-space-md">
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+<strong class="font-semibold text-primary">Payment Service</strong> is experiencing an unusual surge in HTTP 500 errors (<span class="font-code-md text-code-md text-error font-medium">14.2% error rate</span>). Correlated database connection pool exhaustion detected on <span class="font-code-md text-code-md bg-surface-container-lowest px-1 py-0.5 rounded">db-primary-cluster</span> at 10:39 AM UTC following deploy <span class="font-code-md text-code-md bg-surface-container-lowest px-1 py-0.5 rounded">v2.14.0</span>.
+          </p>
+</div>
+<!-- Evidence bullets vs Hypothesis Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm mb-space-md">
+<div class="p-space-sm rounded-lg bg-surface-container">
+<div class="flex items-center gap-1 text-secondary font-label-sm text-label-sm uppercase mb-1">
+<span class="material-symbols-outlined text-[14px]">find_in_page</span>
+<span>Observed Evidence</span>
+</div>
+<ul class="space-y-1 font-body-sm text-body-sm text-on-surface">
+<li class="flex items-start gap-1.5">
+<span class="text-error font-bold">•</span>
+<span>840+ socket timeout logs in 12m</span>
+</li>
+<li class="flex items-start gap-1.5">
+<span class="text-error font-bold">•</span>
+<span>500 status on <code class="font-code-sm text-code-sm">/v1/checkout</code></span>
+</li>
+<li class="flex items-start gap-1.5">
+<span class="text-secondary font-bold">•</span>
+<span>DB Conn usage peaked at 99.8%</span>
+</li>
+</ul>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container">
+<div class="flex items-center gap-1 text-primary font-label-sm text-label-sm uppercase mb-1">
+<span class="material-symbols-outlined text-[14px]">lightbulb</span>
+<span>AI Hypothesis</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface leading-normal">
+              Connection pool starvation caused by unreleased transaction connections in the new checkout worker pool (<code class="font-code-sm text-code-sm">v2.14.0</code> PR #4812).
+            </p>
+<div class="mt-2 font-code-sm text-code-sm text-secondary">
+              Recommended action: Rollback to v2.13.9
+            </div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="px-space-lg py-space-sm bg-surface-container-low flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<button class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md font-semibold hover:opacity-95 shadow-sm transition-all inline-flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>View AI Investigation (INC-1042)</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:bg-surface-container shadow-sm transition-colors inline-flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">build</span>
+<span>View Recommended Fixes</span>
+</button>
+</div>
+<button class="px-2.5 py-1.5 rounded-lg text-primary hover:bg-surface-container font-label-md text-label-md font-medium inline-flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+<span>Ask Assistant</span>
+</button>
+</div>
+</div>
+<!-- Error Rate Line Chart Section -->
+<div class="lg:col-span-6 rounded-xl bg-surface-container-lowest shadow-sm p-space-lg flex flex-col justify-between">
+<div>
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-md">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Application Error Rate</h3>
+<p class="font-body-sm text-body-sm text-secondary">Aggregate HTTP 5xx responses across live clusters</p>
+</div>
+<!-- Time range selector -->
+<div class="inline-flex rounded-lg bg-surface-container p-0.5 font-code-sm text-code-sm">
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface font-semibold shadow-sm" type="button">1h</button>
+<button class="px-2.5 py-1 rounded text-secondary hover:text-on-surface transition-colors" type="button">6h</button>
+<button class="px-2.5 py-1 rounded text-secondary hover:text-on-surface transition-colors" type="button">24h</button>
+<button class="px-2.5 py-1 rounded text-secondary hover:text-on-surface transition-colors" type="button">7d</button>
+</div>
+</div>
+<!-- SVG Line Chart with Grid & Spike Marker -->
+<div class="relative w-full h-56 pt-2">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 540 180">
+<defs>
+<lineargradient id="areaGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#2563eb" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#2563eb" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Horizontal Gridlines -->
+<line stroke="#eceef0" stroke-dasharray="3,3" stroke-width="1" x1="30" x2="530" y1="20" y2="20"></line>
+<line stroke="#eceef0" stroke-dasharray="3,3" stroke-width="1" x1="30" x2="530" y1="60" y2="60"></line>
+<line stroke="#eceef0" stroke-dasharray="3,3" stroke-width="1" x1="30" x2="530" y1="100" y2="100"></line>
+<line stroke="#eceef0" stroke-width="1" x1="30" x2="530" y1="140" y2="140"></line>
+<!-- Y Axis Labels -->
+<text class="fill-secondary font-code-sm text-[10px]" x="5" y="24">5.0%</text>
+<text class="fill-secondary font-code-sm text-[10px]" x="5" y="64">3.5%</text>
+<text class="fill-secondary font-code-sm text-[10px]" x="5" y="104">2.0%</text>
+<text class="fill-secondary font-code-sm text-[10px]" x="5" y="144">0.0%</text>
+<!-- Area Fill -->
+<polygon fill="url(#areaGradient)" points="40,136 80,135 120,136 160,134 200,133 240,136 280,134 320,132 360,130 400,82 430,42 460,45 500,48 520,50 520,140 40,140"></polygon>
+<!-- Line Stroke -->
+<polyline fill="none" points="40,136 80,135 120,136 160,134 200,133 240,136 280,134 320,132 360,130 400,82 430,42 460,45 500,48 520,50" stroke="#2563eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></polyline>
+<!-- Incident Trigger Marker at ~10:42 AM -->
+<line stroke="#ba1a1a" stroke-dasharray="2,2" stroke-width="1.5" x1="430" x2="430" y1="20" y2="140"></line>
+<circle cx="430" cy="42" fill="#ba1a1a" r="5" stroke="#ffffff" stroke-width="2"></circle>
+</svg>
+<!-- Floating Annotation Badge -->
+<div class="absolute left-[70%] top-[10%] -translate-x-1/2 bg-surface-container-lowest px-2 py-1 rounded-md shadow-md flex items-center gap-1.5 pointer-events-none">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+<span class="font-code-sm text-code-sm text-error font-semibold">INC-1042 Triggered (2.4%)</span>
+</div>
+<!-- X Axis Labels -->
+<div class="flex justify-between pl-8 pr-2 pt-2 text-secondary font-code-sm text-[11px]">
+<span>10:00</span>
+<span>10:15</span>
+<span>10:30</span>
+<span class="text-error font-semibold">10:42 (Trigger)</span>
+<span>10:45</span>
+<span>11:00</span>
+</div>
+</div>
+</div>
+<!-- Quick Legend & Status Indicator -->
+<div class="mt-4 pt-3 flex flex-wrap items-center justify-between text-secondary font-body-sm text-body-sm">
+<div class="flex items-center gap-space-md">
+<span class="inline-flex items-center gap-1.5">
+<span class="w-3 h-0.5 bg-primary-container inline-block"></span> Total 5xx Error Rate
+          </span>
+<span class="inline-flex items-center gap-1.5">
+<span class="w-3 h-0.5 bg-surface-container-highest inline-block"></span> Baseline SLA (0.2%)
+          </span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface">Peak Spike: 14.2% (Payment API)</span>
+</div>
+</div>
+</div>
+<!-- Incident Operations Table & Monitored Services -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md">
+<!-- Recent Incidents Table (7 cols on wide) -->
+<div class="xl:col-span-7 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="p-space-lg flex items-center justify-between">
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Active &amp; Recent Incidents</h3>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-code-sm text-code-sm font-semibold">3 Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Correlated triage items requiring operator response</p>
+</div>
+<button class="p-1.5 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low text-secondary font-label-sm text-label-sm uppercase">
+<th class="py-2.5 px-space-md font-medium">Incident ID</th>
+<th class="py-2.5 px-space-md font-medium">Title &amp; Service</th>
+<th class="py-2.5 px-space-md font-medium">Severity</th>
+<th class="py-2.5 px-space-md font-medium">Detected</th>
+<th class="py-2.5 px-space-md font-medium">Status</th>
+<th class="py-2.5 px-space-md font-medium text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm">
+<!-- Row 1: Critical -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-space-md font-code-sm text-code-sm font-semibold text-primary">
+                  INC-1042
+                </td>
+<td class="py-3 px-space-md">
+<div class="font-medium text-on-surface">Payment API returning HTTP 500</div>
+<div class="text-secondary font-code-sm text-code-sm">Payment Service • db-primary-cluster</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-code-sm text-code-sm font-semibold">Critical</span>
+</td>
+<td class="py-3 px-space-md font-code-sm text-code-sm text-secondary">
+                  10:42 AM <span class="block text-error font-medium">(18m ago)</span>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1.5 font-label-md text-label-md text-error font-medium">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+                    Investigating
+                  </span>
+</td>
+<td class="py-3 px-space-md text-right">
+<button class="px-2.5 py-1 rounded-md bg-error text-on-error font-label-sm text-label-sm font-semibold hover:opacity-90 shadow-sm transition-all" type="button">
+                    Investigate
+                  </button>
+</td>
+</tr>
+<!-- Row 2: High -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-space-md font-code-sm text-code-sm font-semibold text-primary">
+                  INC-1041
+                </td>
+<td class="py-3 px-space-md">
+<div class="font-medium text-on-surface">Database latency increased (&gt;850ms)</div>
+<div class="text-secondary font-code-sm text-code-sm">Database Service • PostgreSQL Read-Replica</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-code-sm text-code-sm font-semibold">High</span>
+</td>
+<td class="py-3 px-space-md font-code-sm text-code-sm text-secondary">
+                  10:18 AM <span class="block text-secondary">(42m ago)</span>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1.5 font-label-md text-label-md text-secondary font-medium">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    Identified
+                  </span>
+</td>
+<td class="py-3 px-space-md text-right">
+<button class="px-2.5 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm hover:bg-surface-container shadow-sm transition-colors" type="button">
+                    View
+                  </button>
+</td>
+</tr>
+<!-- Row 3: Medium / Resolved -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-space-md font-code-sm text-code-sm font-semibold text-secondary">
+                  INC-1040
+                </td>
+<td class="py-3 px-space-md">
+<div class="font-medium text-on-surface">User API response timeout</div>
+<div class="text-secondary font-code-sm text-code-sm">User Service • Auth Gateway</div>
+</td>
+<td class="py-3 px-space-md">
+<span class="px-2 py-0.5 rounded bg-surface-container font-code-sm text-code-sm text-secondary font-semibold">Medium</span>
+</td>
+<td class="py-3 px-space-md font-code-sm text-code-sm text-secondary">
+                  09:56 AM <span class="block text-secondary">(1h ago)</span>
+</td>
+<td class="py-3 px-space-md">
+<span class="inline-flex items-center gap-1.5 font-label-md text-label-md text-primary font-medium">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                    Resolved
+                  </span>
+</td>
+<td class="py-3 px-space-md text-right">
+<button class="px-2.5 py-1 rounded-md bg-surface-container-lowest text-secondary font-label-sm text-label-sm hover:text-on-surface hover:bg-surface-container shadow-sm transition-colors" type="button">
+                    Postmortem
+                  </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Footer -->
+<div class="p-space-md bg-surface-container-low flex items-center justify-between text-secondary font-body-sm text-body-sm">
+<span>Showing 3 of 28 incidents this week</span>
+<a class="font-label-md text-label-md text-primary font-semibold hover:underline inline-flex items-center gap-1" href="#">
+<span>View all incidents</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Monitored Services Health Table (5 cols on wide) -->
+<div class="xl:col-span-5 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="p-space-lg flex items-center justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Monitored Services</h3>
+<p class="font-body-sm text-body-sm text-secondary">Real-time p99 latency &amp; error health</p>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-code-sm text-code-sm">12 Active</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low text-secondary font-label-sm text-label-sm uppercase">
+<th class="py-2.5 px-space-md font-medium">Service</th>
+<th class="py-2.5 px-space-md font-medium">Status</th>
+<th class="py-2.5 px-space-md font-medium">Error / p99</th>
+<th class="py-2.5 px-space-md font-medium text-center">Trend (30m)</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm">
+<!-- API Gateway -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2.5 px-space-md">
+<div class="font-medium text-on-surface">API Gateway</div>
+<div class="text-secondary font-code-sm text-code-sm">Prod • v4.1.0</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface font-medium">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                    Operational
+                  </span>
+</td>
+<td class="py-2.5 px-space-md font-code-sm text-code-sm">
+<div>0.02%</div>
+<div class="text-secondary">45ms</div>
+</td>
+<td class="py-2.5 px-space-md text-center">
+<!-- Sparkline Flat -->
+<svg class="w-20 h-5 inline-block" viewbox="0 0 80 20">
+<polyline fill="none" points="0,12 15,11 30,13 45,12 60,11 80,12" stroke="#2563eb" stroke-width="1.5"></polyline>
+</svg>
+</td>
+</tr>
+<!-- User Service -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2.5 px-space-md">
+<div class="font-medium text-on-surface">User Service</div>
+<div class="text-secondary font-code-sm text-code-sm">Prod • v3.8.2</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface font-medium">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                    Operational
+                  </span>
+</td>
+<td class="py-2.5 px-space-md font-code-sm text-code-sm">
+<div>0.15%</div>
+<div class="text-secondary">110ms</div>
+</td>
+<td class="py-2.5 px-space-md text-center">
+<!-- Sparkline slight bump -->
+<svg class="w-20 h-5 inline-block" viewbox="0 0 80 20">
+<polyline fill="none" points="0,14 20,13 35,6 50,14 65,13 80,13" stroke="#2563eb" stroke-width="1.5"></polyline>
+</svg>
+</td>
+</tr>
+<!-- Payment Service -->
+<tr class="hover:bg-surface-container-low transition-colors bg-error-container/10">
+<td class="py-2.5 px-space-md">
+<div class="font-medium text-error flex items-center gap-1">
+<span>Payment Service</span>
+<span class="material-symbols-outlined text-[14px]">priority_high</span>
+</div>
+<div class="text-secondary font-code-sm text-code-sm">Prod • v2.14.0</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-error font-semibold">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+                    Critical
+                  </span>
+</td>
+<td class="py-2.5 px-space-md font-code-sm text-code-sm">
+<div class="text-error font-semibold">14.2%</div>
+<div class="text-error">1,420ms</div>
+</td>
+<td class="py-2.5 px-space-md text-center">
+<!-- Sparkline SPIKE -->
+<svg class="w-20 h-5 inline-block" viewbox="0 0 80 20">
+<polyline fill="none" points="0,16 20,15 40,15 50,4 65,3 80,2" stroke="#ba1a1a" stroke-width="2"></polyline>
+</svg>
+</td>
+</tr>
+<!-- Database Service -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2.5 px-space-md">
+<div class="font-medium text-on-surface">Database Cluster</div>
+<div class="text-secondary font-code-sm text-code-sm">Prod • Postgres 15.3</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary font-medium">
+<span class="w-2 h-2 rounded-full bg-surface-variant"></span>
+                    Degraded
+                  </span>
+</td>
+<td class="py-2.5 px-space-md font-code-sm text-code-sm">
+<div>3.1%</div>
+<div class="text-secondary">860ms</div>
+</td>
+<td class="py-2.5 px-space-md text-center">
+<!-- Sparkline elevated -->
+<svg class="w-20 h-5 inline-block" viewbox="0 0 80 20">
+<polyline fill="none" points="0,15 25,14 45,9 60,8 80,7" stroke="#575e70" stroke-width="1.5"></polyline>
+</svg>
+</td>
+</tr>
+<!-- Notification Service -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2.5 px-space-md">
+<div class="font-medium text-on-surface">Notification Service</div>
+<div class="text-secondary font-code-sm text-code-sm">Prod • v1.9.4</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface font-medium">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                    Operational
+                  </span>
+</td>
+<td class="py-2.5 px-space-md font-code-sm text-code-sm">
+<div>0.00%</div>
+<div class="text-secondary">85ms</div>
+</td>
+<td class="py-2.5 px-space-md text-center">
+<!-- Sparkline flat -->
+<svg class="w-20 h-5 inline-block" viewbox="0 0 80 20">
+<polyline fill="none" points="0,12 20,12 40,11 60,12 80,12" stroke="#2563eb" stroke-width="1.5"></polyline>
+</svg>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Quick Action / Diagnostic Bar -->
+<div class="p-space-md bg-surface-container-low flex items-center justify-between text-secondary font-body-sm text-body-sm">
+<span>Last full topology crawl: 2m ago</span>
+<button class="font-label-md text-label-md text-primary font-semibold hover:underline inline-flex items-center gap-1" type="button">
+<span>Explore Service Mesh</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Operational Quick Runbook Drawer Callout -->
+<div class="mt-space-lg p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Auto-Remediation Workflow Available for INC-1042</h4>
+<p class="font-body-sm text-body-sm text-secondary">
+          AI Commander verified canary rollback safe. Automated pre-flight checks passed on <span class="font-code-sm text-code-sm">k8s-payment-prod-cluster</span>.
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="px-3.5 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-variant transition-colors" type="button">
+        Dry-Run Validation
+      </button>
+<button class="px-3.5 py-1.5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md font-semibold hover:opacity-95 shadow-sm transition-all inline-flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span>Execute Canary Rollback v2.13.9</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Micro-interaction for quick refresh / filter toggles
+  document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      // Subtle tactile click visual feedback
+      this.classList.add('scale-95');
+      setTimeout(() => {
+        this.classList.remove('scale-95');
+      }, 100);
+    });
+  });
+</script></main></div></body></html>
