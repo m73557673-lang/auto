@@ -10,3 +10,5 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .pythonlibs/
+AI_Incident_Commander_Manual.pdf
+manual.html

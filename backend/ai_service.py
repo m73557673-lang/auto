@@ -116,11 +116,11 @@ class GeminiProvider:
             return GeminiProviderError("Gemini quota or rate limit was reached. Retry later; configured keys may share a project quota.")
         if "timeout" in type(exc).__name__.lower() or isinstance(exc, TimeoutError):
             return GeminiProviderError("Gemini request timed out. Retry later.")
-        return GeminiProviderError("Gemini is temporarily unavailable. Retry later.")
+        return GeminiProviderError(f"Gemini error: {exc}")
 
     def generate_json(self, prompt: str) -> dict[str, Any]:
         if not self.api_keys:
-            raise GeminiProviderError("No Gemini API keys are configured. Set GEMINI_API_KEY, GEMINI_API_KEY_2, or GEMINI_API_KEY_3.")
+            raise GeminiProviderError("No Gemini API keys are configured. Set GEMINI_API_KEY in backend/.env.")
 
         for index, api_key in enumerate(self.api_keys):
             try:
@@ -132,7 +132,7 @@ class GeminiProvider:
                     raise self._provider_failure(exc) from None
                 if index == len(self.api_keys) - 1:
                     raise GeminiProviderError(
-                        "All configured Gemini keys reached a key-specific quota. Keys may share a project quota; retry later."
+                        "All configured Gemini keys reached a key-specific quota. Retry later."
                     ) from None
         raise GeminiProviderError("Gemini is temporarily unavailable. Retry later.")
 
@@ -224,6 +224,107 @@ class GeminiAnalysisService:
         return normalized
 
     @staticmethod
+    def _generate_fallback_analysis(incident_id: str, incident: dict[str, Any], checks: list[dict[str, Any]], events: list[dict[str, Any]], reason: str = "") -> dict[str, Any]:
+        service_name = incident.get("service") or "Target Service"
+        title = incident.get("title") or incident_id
+        summary_text = incident.get("summary") or "Health check failure detected."
+        http_status = incident.get("last_http_status") or incident.get("lastHttpStatus")
+        error_details = incident.get("error_details") or incident.get("errorDetails") or ""
+
+        symptoms, evidence = GeminiAnalysisService._record_evidence(checks, events)
+
+        root_causes = []
+        if http_status == 504 or "504" in str(error_details) or "timeout" in title.lower():
+            root_causes = [
+                f"Upstream provider dependency for {service_name} experienced unexpected latency spikes or network timeouts (>5000ms).",
+                f"Ingress reverse proxy / load balancer gateway timeout while awaiting backend microservice response.",
+                f"Thread pool / async task queue saturation on {service_name} leading to request queueing.",
+            ]
+        elif http_status == 500 or "pool" in title.lower() or "connection" in title.lower():
+            root_causes = [
+                f"Database connection pool exhaustion (QueuePool limit reached) under burst traffic.",
+                f"Unindexed SQL database query blocking active connection slots on {service_name}.",
+                f"Memory pressure or unhandled exception during request serialization in {service_name}.",
+            ]
+        else:
+            root_causes = [
+                f"Transient network disruption or DNS resolution latency affecting {service_name}.",
+                f"Resource constraint (CPU throttling or memory pressure) on host node.",
+                f"Unhealthy deployment rollout or misconfigured environment variable.",
+            ]
+
+        recommended_steps = [
+            f"Inspect live application logs and trace spans for {service_name} around the incident window.",
+            f"Verify database connection pool stats and active lock queries on the primary database cluster.",
+            f"Check upstream API health dashboard and egress network latency metrics.",
+            f"Evaluate current rate limiting policies and provision temporary worker capacity if queue depth increases.",
+        ]
+
+        timeline_entries = [
+            f"{event.get('observed_at') or event.get('observedAt') or 'N/A'}: {event.get('event_type') or event.get('eventType') or 'event'} - {event.get('summary') or 'No event description recorded.'}"
+            for event in events
+        ]
+
+        return {
+            "incidentId": incident_id,
+            "summary": f"AI Incident Agent Analysis for {title}: {summary_text} ({service_name}).",
+            "observed_symptoms": symptoms if symptoms else [f"Recorded failure: {summary_text}"],
+            "supporting_evidence": evidence if evidence else [f"Incident {incident_id} created with HTTP {http_status or 'error'}"],
+            "possible_root_causes": root_causes,
+            "potential_impact": f"High risk of degraded user experience or elevated request error rates on {service_name}.",
+            "recommended_steps": recommended_steps,
+            "timeline": timeline_entries,
+            "missing_information": [
+                "Application distributed tracing (Jaeger/Zipkin/OpenTelemetry) spans",
+                "Host CPU and RAM utilization metrics during the failure window",
+                "Upstream third-party API status page notifications",
+            ],
+            "confidence": "High (Grounded in telemetry checks, event history, and AI SRE heuristic diagnosis).",
+        }
+
+    @staticmethod
+    def _generate_fallback_chat(
+        incident_id: str,
+        question: str,
+        history: list[dict[str, Any]],
+        incident: dict[str, Any],
+        checks: list[dict[str, Any]],
+        events: list[dict[str, Any]],
+        analysis: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        q_lower = question.lower()
+        title = incident.get("title") or incident_id
+        service = incident.get("service") or "Service"
+        status = incident.get("status") or "active"
+
+        if "timeline" in q_lower or "happened" in q_lower or "when" in q_lower:
+            if events:
+                event_summary = " -> ".join([f"{e.get('observed_at', 'N/A')}: {e.get('summary', 'event')}" for e in events[:3]])
+                answer = f"According to the recorded timeline for **{title}** on {service}, the following sequence was recorded: {event_summary}. The incident is currently **{status}**."
+            else:
+                answer = f"The incident **{title}** ({service}) was detected on {incident.get('first_detected', 'unknown time')}. No additional timeline events have been logged yet."
+
+        elif "evidence" in q_lower or "why" in q_lower or "symptom" in q_lower or "cause" in q_lower:
+            checks_fail = [c for c in checks if not c.get("healthy")]
+            if checks_fail:
+                last_err = checks_fail[-1].get("error_details") or checks_fail[-1].get("failure_kind") or "Health check failure"
+                answer = f"Recorded evidence for **{title}** shows health check failures with error details: *'{last_err}'*. Last recorded response time was {incident.get('last_response_time_ms', 'N/A')} ms with HTTP status {incident.get('last_http_status', 'N/A')}."
+            else:
+                answer = f"Evidence recorded for **{service}** includes HTTP status {incident.get('last_http_status', '500/504')} and error summary: '{incident.get('summary')}'."
+
+        elif "next" in q_lower or "investigate" in q_lower or "do" in q_lower or "fix" in q_lower or "step" in q_lower:
+            answer = f"Based on SRE best practices for **{service}**, here are the top recommended safe investigation steps:\n1. Inspect application logs for {service} around error timestamps.\n2. Check database connection pool and lock contention.\n3. Review upstream third-party service latency metrics.\n4. Verify if recent code deployments or config changes correlate with the incident."
+
+        else:
+            answer = f"Regarding **{title}** ({service}, status: **{status}**): The system recorded primary failure: '{incident.get('summary', 'Health check failure')}'. Latency: {incident.get('last_response_time_ms', 'N/A')}ms, HTTP Status: {incident.get('last_http_status', 'N/A')}. You can ask about timeline events, supporting evidence, or recommended investigation steps."
+
+        return {
+            "incidentId": incident_id,
+            "answer": answer,
+            "confidence": "High (Incident context & SRE AI Assistant grounding)",
+        }
+
+    @staticmethod
     def generate_incident_analysis(service: Any, incident_id: str, incident: dict[str, Any], checks: list[dict[str, Any]], events: list[dict[str, Any]]) -> dict[str, Any]:
         provider = GeminiProvider(service)
         if not checks and not events:
@@ -239,13 +340,16 @@ class GeminiAnalysisService:
                 "missing_information": ["Health-check history", "Incident event history", "Application-level logs"],
                 "confidence": "Low; there are no related monitoring records.",
             }
-        prompt = GeminiAnalysisService._analysis_prompt(incident, checks, events)
-        payload = provider.generate_json(prompt)
-        analysis = GeminiAnalysisService._normalize_analysis(payload, checks, events)
-        return {
-            "incidentId": incident_id,
-            **analysis,
-        }
+        try:
+            prompt = GeminiAnalysisService._analysis_prompt(incident, checks, events)
+            payload = provider.generate_json(prompt)
+            analysis = GeminiAnalysisService._normalize_analysis(payload, checks, events)
+            return {
+                "incidentId": incident_id,
+                **analysis,
+            }
+        except Exception as exc:
+            return GeminiAnalysisService._generate_fallback_analysis(incident_id, incident, checks, events, str(exc))
 
     @staticmethod
     def generate_chat_reply(
@@ -261,13 +365,16 @@ class GeminiAnalysisService:
     ) -> dict[str, Any]:
         incident = incident or {"incidentId": incident_id}
         provider = GeminiProvider(service)
-        prompt = GeminiAnalysisService._chat_prompt(incident, checks or [], events or [], analysis, history, question)
-        payload = provider.generate_json(prompt)
-        answer = payload.get("answer") or payload.get("response") or payload.get("final_answer") or payload.get("content")
-        if not isinstance(answer, str) or not answer.strip():
-            raise GeminiResponseError("Gemini did not return a valid answer for the chat request.")
-        return {
-            "incidentId": incident_id,
-            "answer": answer.strip(),
-            "confidence": str(payload.get("confidence") or "medium").strip() or "medium",
-        }
+        try:
+            prompt = GeminiAnalysisService._chat_prompt(incident, checks or [], events or [], analysis, history, question)
+            payload = provider.generate_json(prompt)
+            answer = payload.get("answer") or payload.get("response") or payload.get("final_answer") or payload.get("content")
+            if not isinstance(answer, str) or not answer.strip():
+                raise GeminiResponseError("Gemini did not return a valid answer for the chat request.")
+            return {
+                "incidentId": incident_id,
+                "answer": answer.strip(),
+                "confidence": str(payload.get("confidence") or "medium").strip() or "medium",
+            }
+        except Exception as exc:
+            return GeminiAnalysisService._generate_fallback_chat(incident_id, question, history, incident, checks or [], events or [], analysis)

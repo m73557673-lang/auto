@@ -228,7 +228,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         authorization: str | None = Header(default=None),
     ) -> IncidentAnalysisResponse:
         require_token(config, authorization)
-        if not re.fullmatch(r"inc-[a-f0-9]{12}", incident_id):
+        if not re.fullmatch(r"inc-[a-zA-Z0-9_\-]+", incident_id):
             raise HTTPException(status_code=404, detail="Incident not found")
         incident = database.get_incident(incident_id)
         if not incident:
@@ -262,7 +262,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get("/api/incidents/{incident_id}/analysis")
     def incident_analysis_get(incident_id: str):
-        if not re.fullmatch(r"inc-[a-f0-9]{12}", incident_id) or not database.get_incident(incident_id):
+        if not re.fullmatch(r"inc-[a-zA-Z0-9_\-]+", incident_id) or not database.get_incident(incident_id):
             raise HTTPException(status_code=404, detail="Incident not found")
         analysis = database.get_latest_incident_analysis(incident_id)
         if not analysis:
@@ -276,7 +276,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         authorization: str | None = Header(default=None),
     ) -> IncidentChatResponse:
         require_token(config, authorization)
-        if not re.fullmatch(r"inc-[a-f0-9]{12}", incident_id):
+        if not re.fullmatch(r"inc-[a-zA-Z0-9_\-]+", incident_id):
             raise HTTPException(status_code=404, detail="Incident not found")
         incident = database.get_incident(incident_id)
         if not incident:
@@ -318,7 +318,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         incident_id: str,
         conversation_id: str | None = Query(default=None, alias="conversationId", max_length=80),
     ) -> list[IncidentChatMessage]:
-        if not re.fullmatch(r"inc-[a-f0-9]{12}", incident_id) or not database.get_incident(incident_id):
+        if not re.fullmatch(r"inc-[a-zA-Z0-9_\-]+", incident_id) or not database.get_incident(incident_id):
             raise HTTPException(status_code=404, detail="Incident not found")
         if not conversation_id:
             return []
