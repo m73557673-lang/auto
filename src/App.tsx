@@ -84,21 +84,21 @@ export default function App() {
 
   const stanleyMood =
     monitoring?.status === 'failing'
-      ? { text: 'Stanley: Investigating Incident! 🚨', status: 'alert' as const }
+      ? { text: 'Watchdog: Investigating Incident! 🚨', status: 'alert' as const }
       : monitoring?.status === 'healthy'
-        ? { text: 'Stanley: Vital Signs Healthy 🐾', status: 'healthy' as const }
-        : { text: 'Stanley: Standby Watchdog 🐾', status: 'online' as const };
+        ? { text: 'Watchdog: Systems Healthy 🐾', status: 'healthy' as const }
+        : { text: 'Watchdog: Active Monitoring 🐾', status: 'online' as const };
 
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <a href="#/overview" className="brand" aria-label="Vitality Incident Commander overview">
+        <a href="#/overview" className="brand" aria-label="AI Autonomous Incident Commander overview">
           <span className="brand-mark">
-            <img src="/assets/vitality_dog_circle_avatar.png" alt="Stanley the Vitality Dog Mascot" />
+            <img src="/assets/vitality_dog_circle_avatar.png" alt="AI Autonomous Incident Commander Mascot" />
           </span>
           <span className="brand-copy">
-            <strong>Vitality SRE</strong>
-            <small>Stanley Watchdog Ops</small>
+            <strong>AI Autonomous</strong>
+            <small>Incident Commander</small>
           </span>
         </a>
         <div>
@@ -127,27 +127,27 @@ export default function App() {
           <div className="sidebar-mascot-head">
             <img
               src="/assets/vitality_dog_circle_avatar.png"
-              alt="Stanley"
+              alt="Watchdog Mascot"
               className="sidebar-mascot-avatar"
             />
             <div>
-              <div className="sidebar-mascot-title">Stanley the Watchdog</div>
-              <div className="sidebar-mascot-sub">Live longer, resolve faster</div>
+              <div className="sidebar-mascot-title">Autonomous Watchdog</div>
+              <div className="sidebar-mascot-sub">AI Incident Commander</div>
             </div>
           </div>
-          <p>“Keep your services active and healthy! Proactive telemetry prevents downtime.”</p>
+          <p>“Active telemetry monitoring and autonomous triage to keep services healthy and prevent downtime.”</p>
         </div>
       </aside>
 
       <div className="app-main">
         <header className="topbar">
           <div className="page-title-group">
-            <span className="page-kicker">Vitality Health & Resilience</span>
-            <strong className="console-name">Incident Commander</strong>
+            <span className="page-kicker">AI Autonomous Incident Commander</span>
+            <strong className="console-name">Operations Console</strong>
           </div>
           <div className="topbar-right">
-            <div className="stanley-companion-badge" title="Stanley AI companion status">
-              <img src="/assets/vitality_dog_circle_avatar.png" alt="Stanley" />
+            <div className="stanley-companion-badge" title="Watchdog companion status">
+              <img src="/assets/vitality_dog_circle_avatar.png" alt="Watchdog Mascot" />
               <span>{stanleyMood.text}</span>
             </div>
             <span className={`connection-indicator ${monitorTone}`} role="status" title={monitorLabel}>

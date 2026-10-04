@@ -42,9 +42,9 @@ export default function OverviewPage({ refreshKey, onOpenIncident }: { refreshKe
   return (
     <>
       <VitalityMascotBanner
-        badge="Vitality Active Protection"
-        title="Live Longer, Resolve Faster with Vitality SRE"
-        description="Get covered. Keep services healthy. Proactive watchdog monitoring and AI telemetry analysis powered by Stanley."
+        badge="Autonomous Protection"
+        title="AI Autonomous Incident Commander"
+        description="Active watchdog monitoring, automated triage, and intelligent telemetry analysis to keep your microservices healthy and resilient."
         accent="magenta"
       >
         <a href="#/incidents" className="button white small">
@@ -53,11 +53,11 @@ export default function OverviewPage({ refreshKey, onOpenIncident }: { refreshKe
         </a>
         <a href="#/assistant" className="button small" style={{ background: 'rgba(255,255,255,0.2)', color: '#fff', borderColor: 'rgba(255,255,255,0.4)' }}>
           <Icon name="psychology" />
-          <span>Ask Stanley AI</span>
+          <span>Ask AI Assistant</span>
         </a>
       </VitalityMascotBanner>
 
-      <PageIntro eyebrow="Operations / Summary" title="System Vitality Overview" description="A real-time view of monitored microservices, active incidents, and telemetry health." />
+      <PageIntro eyebrow="Operations / Summary" title="Autonomous Operations Overview" description="A real-time view of monitored microservices, active incidents, and telemetry health." />
       {error ? <ErrorState message={error} retry={() => setRetry((value) => value + 1)} /> : null}
       {loading && !error ? (
         <SkeletonRows count={7} />

@@ -57,9 +57,9 @@ export default function LogsPage({ refreshKey, selectedId, onSelect }: { refresh
   return (
     <>
       <VitalityMascotBanner
-        badge="Stanley Telemetry & Trace"
+        badge="Autonomous Telemetry & Trace"
         title="Diagnostics & Raw Incident Logs"
-        description="Stanley traces every timestamped probe, HTTP status response, and transition event to help you uncover system root causes."
+        description="Comprehensive tracing for timestamped probes, HTTP status responses, and transition events to help uncover system root causes."
         accent="dark"
       />
       <PageIntro eyebrow="Operations / Evidence" title="Logs explorer" description="Monitoring check and event records are scoped to a selected incident. No global log stream is available through this API." />

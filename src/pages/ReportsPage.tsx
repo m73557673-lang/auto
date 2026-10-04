@@ -39,7 +39,7 @@ export default function ReportsPage({ refreshKey, onOpenIncident }: { refreshKey
   return (
     <>
       <VitalityMascotBanner
-        badge="Vitality Health Scorecard"
+        badge="System Reliability Scorecard"
         title="Reliability Benchmarks & Incident Metrics"
         description="Historical distribution of incident severities, recovery velocity, and operational endurance across all registered microservices."
         accent="magenta"

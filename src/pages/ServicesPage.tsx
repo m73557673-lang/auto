@@ -36,9 +36,9 @@ export default function ServicesPage({ refreshKey }: { refreshKey: number }) {
   return (
     <>
       <VitalityMascotBanner
-        badge="Microservice Vital Signs"
-        title="Proactive Health Checks & Telemetry"
-        description="Every microservice undergoes continuous heartbeat verification to maintain maximum availability and zero-downtime endurance."
+        badge="Autonomous Service Telemetry"
+        title="Proactive Health Checks & Monitoring"
+        description="Every microservice undergoes continuous heartbeat verification to maintain maximum availability and system endurance."
         accent="magenta"
       />
       <PageIntro eyebrow="Operations / Monitoring" title="Services" description="Live monitoring configuration and the latest health reported for each service." />

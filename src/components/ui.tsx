@@ -69,13 +69,13 @@ export function VitalityDogAvatar({
     <div className={`vitality-avatar-wrap ${className}`} style={{ width: size, height: size }}>
       <img
         src="/assets/vitality_dog_circle_avatar.png"
-        alt="Stanley the Vitality Dog Mascot"
+        alt="AI Autonomous Incident Commander Mascot"
         className="vitality-avatar-img"
       />
       {status && (
         <span
           className={`vitality-avatar-dot ${status}`}
-          title={`Stanley status: ${status}`}
+          title={`Watchdog status: ${status}`}
         />
       )}
     </div>
@@ -83,7 +83,7 @@ export function VitalityDogAvatar({
 }
 
 export function VitalityMascotBanner({
-  badge = 'Vitality SRE Protection',
+  badge = 'Autonomous SRE Protection',
   title,
   description,
   accent = 'magenta',
@@ -109,7 +109,7 @@ export function VitalityMascotBanner({
       <div className="vitality-banner-mascot">
         <img
           src="/assets/vitality_dog_transparent.png"
-          alt="Stanley the Vitality Dachshund with dumbbells and water bottle"
+          alt="AI Autonomous Incident Commander Watchdog"
           className="vitality-banner-dog"
         />
       </div>

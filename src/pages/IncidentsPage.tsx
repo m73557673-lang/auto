@@ -35,9 +35,9 @@ export default function IncidentsPage({
   return (
     <>
       <VitalityMascotBanner
-        badge="Stanley Incident Watchdog"
+        badge="Autonomous Incident Watchdog"
         title="Active Incident Triage & Rapid Recovery"
-        description="Stanley continuously sniffs out anomalous latency, correlates health checks, and triggers AI root-cause analysis."
+        description="Continuously detecting anomalous latency, correlating health checks, and triggering autonomous root-cause analysis."
         accent="dark"
       />
       <PageIntro eyebrow="Operations / Response" title="Incidents" description="Investigate recorded failures, review check evidence, and examine AI-generated analysis." />
