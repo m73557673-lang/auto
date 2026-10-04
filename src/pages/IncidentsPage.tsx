@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { incidentApi, type IncidentAnalysis, type IncidentEvent, type IncidentRecord, type MonitoringCheck } from '../services/api';
-import { Button, ErrorState, formatDate, Icon, PageIntro, Severity, SkeletonRows, StateBox, Status } from '../components/ui';
+import { Button, ErrorState, formatDate, Icon, PageIntro, Severity, SkeletonRows, StateBox, Status, VitalityMascotBanner } from '../components/ui';
 
 function requestError(error: unknown) { return error instanceof Error ? error.message : 'The incident request failed.'; }
 
@@ -34,6 +34,12 @@ export default function IncidentsPage({
 
   return (
     <>
+      <VitalityMascotBanner
+        badge="Stanley Incident Watchdog"
+        title="Active Incident Triage & Rapid Recovery"
+        description="Stanley continuously sniffs out anomalous latency, correlates health checks, and triggers AI root-cause analysis."
+        accent="dark"
+      />
       <PageIntro eyebrow="Operations / Response" title="Incidents" description="Investigate recorded failures, review check evidence, and examine AI-generated analysis." />
       <div className="detail-layout">
         <section className="panel" aria-label="Incident list">

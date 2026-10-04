@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { incidentApi, type MonitoringStatus, type ServiceHealth } from '../services/api';
-import { ErrorState, formatDate, Icon, PageIntro, SkeletonRows, StateBox } from '../components/ui';
+import { ErrorState, formatDate, Icon, PageIntro, SkeletonRows, StateBox, VitalityMascotBanner } from '../components/ui';
 
 function healthy(value: boolean | 0 | 1 | null) { return value === true || value === 1; }
 
@@ -35,6 +35,12 @@ export default function ServicesPage({ refreshKey }: { refreshKey: number }) {
 
   return (
     <>
+      <VitalityMascotBanner
+        badge="Microservice Vital Signs"
+        title="Proactive Health Checks & Telemetry"
+        description="Every microservice undergoes continuous heartbeat verification to maintain maximum availability and zero-downtime endurance."
+        accent="magenta"
+      />
       <PageIntro eyebrow="Operations / Monitoring" title="Services" description="Live monitoring configuration and the latest health reported for each service." />
       {error && <ErrorState message={error} retry={() => setRetry((value) => value + 1)} />}
       {loading && !error ? <SkeletonRows count={6} /> : !error && (

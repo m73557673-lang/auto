@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { incidentApi, type IncidentRecord } from '../services/api';
-import { ErrorState, Icon, PageIntro, Severity, SkeletonRows, StateBox, Status, formatDate } from '../components/ui';
+import { ErrorState, Icon, PageIntro, Severity, SkeletonRows, StateBox, Status, formatDate, VitalityMascotBanner } from '../components/ui';
 
 export default function ReportsPage({ refreshKey, onOpenIncident }: { refreshKey: number; onOpenIncident: (id: string) => void }) {
   const [records, setRecords] = useState<IncidentRecord[]>([]);
@@ -38,6 +38,12 @@ export default function ReportsPage({ refreshKey, onOpenIncident }: { refreshKey
 
   return (
     <>
+      <VitalityMascotBanner
+        badge="Vitality Health Scorecard"
+        title="Reliability Benchmarks & Incident Metrics"
+        description="Historical distribution of incident severities, recovery velocity, and operational endurance across all registered microservices."
+        accent="magenta"
+      />
       <PageIntro eyebrow="Operations / Records" title="Reports" description="Incident summaries derived from records available through the incident service." />
       {error && <ErrorState message={error} retry={() => setRetry((value) => value + 1)} />}
       {loading && !error ? <SkeletonRows count={5} /> : !error && (

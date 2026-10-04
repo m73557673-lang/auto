@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { incidentApi, type IncidentEvent, type IncidentRecord, type MonitoringCheck } from '../services/api';
-import { ErrorState, formatDate, Icon, PageIntro, Severity, SkeletonRows, StateBox, Status } from '../components/ui';
+import { ErrorState, formatDate, Icon, PageIntro, Severity, SkeletonRows, StateBox, Status, VitalityMascotBanner } from '../components/ui';
 
 export default function LogsPage({ refreshKey, selectedId, onSelect }: { refreshKey: number; selectedId: string | null; onSelect: (id: string) => void }) {
   const [incidents, setIncidents] = useState<IncidentRecord[]>([]);
@@ -56,6 +56,12 @@ export default function LogsPage({ refreshKey, selectedId, onSelect }: { refresh
 
   return (
     <>
+      <VitalityMascotBanner
+        badge="Stanley Telemetry & Trace"
+        title="Diagnostics & Raw Incident Logs"
+        description="Stanley traces every timestamped probe, HTTP status response, and transition event to help you uncover system root causes."
+        accent="dark"
+      />
       <PageIntro eyebrow="Operations / Evidence" title="Logs explorer" description="Monitoring check and event records are scoped to a selected incident. No global log stream is available through this API." />
       {listError ? <ErrorState message={listError} retry={() => setRetry((value) => value + 1)} /> : (
         <>

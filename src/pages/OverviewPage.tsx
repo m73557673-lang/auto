@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { incidentApi, type IncidentRecord, type ServiceHealth } from '../services/api';
-import { ErrorState, formatDate, Icon, PageIntro, Severity, SkeletonRows, StateBox, Status } from '../components/ui';
+import { ErrorState, formatDate, Icon, PageIntro, Severity, SkeletonRows, StateBox, Status, VitalityMascotBanner } from '../components/ui';
 
 function isHealthy(value: boolean | 0 | 1 | null) {
   return value === true || value === 1;
@@ -41,7 +41,23 @@ export default function OverviewPage({ refreshKey, onOpenIncident }: { refreshKe
 
   return (
     <>
-      <PageIntro eyebrow="Operations / Summary" title="Overview" description="A current view of monitored services and recorded incident activity." />
+      <VitalityMascotBanner
+        badge="Vitality Active Protection"
+        title="Live Longer, Resolve Faster with Vitality SRE"
+        description="Get covered. Keep services healthy. Proactive watchdog monitoring and AI telemetry analysis powered by Stanley."
+        accent="magenta"
+      >
+        <a href="#/incidents" className="button white small">
+          <Icon name="warning" />
+          <span>View Incidents ({counts?.active ?? 0} active)</span>
+        </a>
+        <a href="#/assistant" className="button small" style={{ background: 'rgba(255,255,255,0.2)', color: '#fff', borderColor: 'rgba(255,255,255,0.4)' }}>
+          <Icon name="psychology" />
+          <span>Ask Stanley AI</span>
+        </a>
+      </VitalityMascotBanner>
+
+      <PageIntro eyebrow="Operations / Summary" title="System Vitality Overview" description="A real-time view of monitored microservices, active incidents, and telemetry health." />
       {error ? <ErrorState message={error} retry={() => setRetry((value) => value + 1)} /> : null}
       {loading && !error ? (
         <SkeletonRows count={7} />

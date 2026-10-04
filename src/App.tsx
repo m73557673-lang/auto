@@ -82,42 +82,85 @@ export default function App() {
               : 'Awaiting first check';
   const monitorTone = connection === 'unavailable' ? 'unavailable' : connection === 'loading' || !monitoring ? 'loading' : !monitoring.enabled ? 'disabled' : monitoring.status === 'failing' ? 'failing' : 'connected';
 
+  const stanleyMood =
+    monitoring?.status === 'failing'
+      ? { text: 'Stanley: Investigating Incident! 🚨', status: 'alert' as const }
+      : monitoring?.status === 'healthy'
+        ? { text: 'Stanley: Vital Signs Healthy 🐾', status: 'healthy' as const }
+        : { text: 'Stanley: Standby Watchdog 🐾', status: 'online' as const };
+
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <a href="#/overview" className="brand" aria-label="AI Incident Commander overview">
-          <span className="brand-mark"><Icon name="shield" /></span>
-          <span className="brand-copy"><strong>Incident Commander</strong><small>SRE operations</small></span>
+        <a href="#/overview" className="brand" aria-label="Vitality Incident Commander overview">
+          <span className="brand-mark">
+            <img src="/assets/vitality_dog_circle_avatar.png" alt="Stanley the Vitality Dog Mascot" />
+          </span>
+          <span className="brand-copy">
+            <strong>Vitality SRE</strong>
+            <small>Stanley Watchdog Ops</small>
+          </span>
         </a>
         <div>
-          <p className="nav-caption">Workspace</p>
+          <p className="nav-caption">Operations</p>
           <nav className="primary-nav" aria-label="Primary navigation">
             {pages.map((page) => (
-              <a key={page.id} href={`#/${page.id}`} className={`nav-link ${activePage === page.id ? 'active' : ''}`} aria-label={page.label} aria-current={activePage === page.id ? 'page' : undefined}>
+              <a
+                key={page.id}
+                href={`#/${page.id}`}
+                className={`nav-link ${activePage === page.id ? 'active' : ''}`}
+                aria-label={page.label}
+                aria-current={activePage === page.id ? 'page' : undefined}
+              >
                 <Icon name={page.icon} className="nav-icon" />
                 <span>{page.label}</span>
-                {page.id === 'incidents' && activeCount !== null && activeCount > 0 && <span className="nav-badge" aria-label={`${activeCount} active incidents`}>{activeCount}</span>}
+                {page.id === 'incidents' && activeCount !== null && activeCount > 0 && (
+                  <span className="nav-badge" aria-label={`${activeCount} active incidents`}>
+                    {activeCount}
+                  </span>
+                )}
               </a>
             ))}
           </nav>
         </div>
-        <div className="sidebar-note">
-          <div className="sidebar-note-label"><Icon name="verified_user" /> Incident response</div>
-          <p>Monitor service health, investigate evidence, and keep response decisions grounded in recorded data.</p>
+        <div className="sidebar-mascot-card">
+          <div className="sidebar-mascot-head">
+            <img
+              src="/assets/vitality_dog_circle_avatar.png"
+              alt="Stanley"
+              className="sidebar-mascot-avatar"
+            />
+            <div>
+              <div className="sidebar-mascot-title">Stanley the Watchdog</div>
+              <div className="sidebar-mascot-sub">Live longer, resolve faster</div>
+            </div>
+          </div>
+          <p>“Keep your services active and healthy! Proactive telemetry prevents downtime.”</p>
         </div>
       </aside>
 
       <div className="app-main">
         <header className="topbar">
           <div className="page-title-group">
-            <span className="page-kicker">AI Incident Commander</span>
-            <strong className="console-name">Operations console</strong>
+            <span className="page-kicker">Vitality Health & Resilience</span>
+            <strong className="console-name">Incident Commander</strong>
           </div>
           <div className="topbar-right">
+            <div className="stanley-companion-badge" title="Stanley AI companion status">
+              <img src="/assets/vitality_dog_circle_avatar.png" alt="Stanley" />
+              <span>{stanleyMood.text}</span>
+            </div>
             <span className={`connection-indicator ${monitorTone}`} role="status" title={monitorLabel}>
-              <span className="connection-dot" />{monitorLabel}
+              <span className="connection-dot" />
+              {monitorLabel}
             </span>
-            <button type="button" className="icon-button" aria-label="Refresh application data" title="Refresh application data" onClick={() => setRefreshKey((key) => key + 1)}>
+            <button
+              type="button"
+              className="icon-button"
+              aria-label="Refresh application data"
+              title="Refresh application data"
+              onClick={() => setRefreshKey((key) => key + 1)}
+            >
               <Icon name="refresh" />
             </button>
           </div>
