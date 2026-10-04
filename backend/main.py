@@ -102,18 +102,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
-        try:
-            database.initialize()
-        except Exception as exc:
-            logger.exception("Database initialization error in lifespan: %s", exc)
-
+        database.initialize()
         task = None
-        is_serverless = bool(
-            os.getenv("VERCEL")
-            or os.getenv("VERCEL_ENV")
-            or os.getenv("AWS_LAMBDA_FUNCTION_NAME")
-        )
-        if config.monitor_enabled and not is_serverless:
+        if config.monitor_enabled:
             task = asyncio.create_task(monitor.run_forever(), name="health-monitor")
         app.state.monitor_task = task
         yield
@@ -123,7 +114,6 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 await task
             except asyncio.CancelledError:
                 pass
-
 
     app = FastAPI(title="AI Incident Commander API", version="0.1.0", lifespan=lifespan)
     app.state.settings = config
@@ -167,7 +157,6 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return JSONResponse(status_code=exc.status_code, content={"detail": exc.detail}, headers=exc.headers)
 
     @app.get("/api/health")
-    @app.get("/health")
     def health():
         database.health()
         return {"status": "ok", "database": "ok"}

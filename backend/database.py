@@ -26,20 +26,9 @@ class Database:
 
     @contextmanager
     def connection(self) -> Iterator[sqlite3.Connection]:
-        db_path = self.path
-        if str(db_path) != ":memory:":
-            try:
-                db_path.parent.mkdir(parents=True, exist_ok=True)
-            except OSError:
-                db_path = Path("/tmp") / db_path.name
-                db_path.parent.mkdir(parents=True, exist_ok=True)
-        try:
-            connection = sqlite3.connect(str(db_path), timeout=10)
-        except sqlite3.OperationalError:
-            db_path = Path("/tmp") / db_path.name
-            db_path.parent.mkdir(parents=True, exist_ok=True)
-            connection = sqlite3.connect(str(db_path), timeout=10)
-
+        if str(self.path) != ":memory:":
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+        connection = sqlite3.connect(str(self.path), timeout=10)
         connection.row_factory = sqlite3.Row
         connection.execute("PRAGMA foreign_keys = ON")
         try:
@@ -126,9 +115,8 @@ class Database:
                     ON incident_chat_messages(incident_id, conversation_id, created_at);
                 """
             )
-        if os.getenv("VERCEL") or os.getenv("VERCEL_ENV") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"):
+        if os.getenv("VERCEL"):
             self.seed_initial_incidents_if_empty()
-
 
 
     def seed_initial_incidents_if_empty(self) -> None:

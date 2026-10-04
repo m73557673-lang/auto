@@ -1,8 +1,6 @@
-"""Root entrypoint fallback that delegates to backend.main."""
-from backend.main import app, create_app
+def main():
+    print("Hello from repl-nix-workspace!")
 
-__all__ = ["app", "create_app"]
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    main()

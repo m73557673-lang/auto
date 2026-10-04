@@ -87,21 +87,9 @@ class Settings:
         gemini_model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash").strip() or "gemini-2.5-flash"
         gemini_timeout_seconds = _positive_float("GEMINI_TIMEOUT_SECONDS", 30.0)
 
-        is_serverless = bool(
-            os.getenv("VERCEL")
-            or os.getenv("VERCEL_ENV")
-            or os.getenv("AWS_LAMBDA_FUNCTION_NAME")
-            or not os.access(str(BACKEND_DIR), os.W_OK)
-        )
-        raw_db_path = os.getenv("DATABASE_PATH", "").strip()
-        if is_serverless:
-            if not raw_db_path or not raw_db_path.startswith("/tmp"):
-                raw_db_path = "/tmp/incidents.sqlite3"
-        elif not raw_db_path:
-            raw_db_path = str(BACKEND_DIR / "data" / "incidents.sqlite3")
-
+        default_db_path = "/tmp/incidents.sqlite3" if os.getenv("VERCEL") else str(BACKEND_DIR / "data" / "incidents.sqlite3")
         return cls(
-            database_path=Path(raw_db_path),
+            database_path=Path(os.getenv("DATABASE_PATH", default_db_path)),
             monitor_target_url=target_url,
             service_name=os.getenv("MONITOR_SERVICE_NAME", "Target application").strip() or "Target application",
             monitor_enabled=enabled,
