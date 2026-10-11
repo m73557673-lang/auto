@@ -1,6 +1,6 @@
 {
-  "mode": "failure",
-  "updatedAt": "2026-10-11T17:30:48.018720+00:00",
+  "mode": "healthy",
+  "updatedAt": "2026-10-11T17:32:07.381543+00:00",
   "nextIndex": 1,
   "incidents": [
     {
@@ -249,13 +249,13 @@
       "summary": "The simulated origin shield is failing to serve fresh assets.",
       "service": "Content Delivery Network",
       "severity": "high",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T17:30:48.018506+00:00",
-      "lastObserved": "2026-10-11T17:30:48.018506+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 502,
-      "lastResponseTimeMs": 870.0,
-      "errorDetails": "The simulated origin shield is failing to serve fresh assets.",
+      "lastObserved": "2026-10-11T17:32:07.381473+00:00",
+      "resolvedAt": "2026-10-11T17:32:07.381473+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -272,6 +272,14 @@
           "httpStatus": 502,
           "responseTimeMs": 870.0,
           "errorDetails": "The simulated origin shield is failing to serve fresh assets."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:32:07.381473+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     },
@@ -281,13 +289,13 @@
       "summary": "The simulated order queue is backing up while consumers are unavailable.",
       "service": "Order Processing Service",
       "severity": "critical",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T17:30:48.018507+00:00",
-      "lastObserved": "2026-10-11T17:30:48.018507+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 503,
-      "lastResponseTimeMs": 7400.0,
-      "errorDetails": "The simulated order queue is backing up while consumers are unavailable.",
+      "lastObserved": "2026-10-11T17:32:07.381473+00:00",
+      "resolvedAt": "2026-10-11T17:32:07.381473+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -304,6 +312,14 @@
           "httpStatus": 503,
           "responseTimeMs": 7400.0,
           "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:32:07.381473+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     },
@@ -313,13 +329,13 @@
       "summary": "The simulated profile store has exhausted its connection pool.",
       "service": "User Profile Service",
       "severity": "medium",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T17:30:48.018508+00:00",
-      "lastObserved": "2026-10-11T17:30:48.018508+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 500,
-      "lastResponseTimeMs": 4200.0,
-      "errorDetails": "The simulated profile store has exhausted its connection pool.",
+      "lastObserved": "2026-10-11T17:32:07.381473+00:00",
+      "resolvedAt": "2026-10-11T17:32:07.381473+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -336,6 +352,14 @@
           "httpStatus": 500,
           "responseTimeMs": 4200.0,
           "errorDetails": "The simulated profile store has exhausted its connection pool."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:32:07.381473+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     },
@@ -345,13 +369,13 @@
       "summary": "The simulated carrier endpoint is rejecting tracking webhooks.",
       "service": "Shipping Logistics Service",
       "severity": "medium",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T17:30:48.018509+00:00",
-      "lastObserved": "2026-10-11T17:30:48.018509+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 502,
-      "lastResponseTimeMs": 3100.0,
-      "errorDetails": "The simulated carrier endpoint is rejecting tracking webhooks.",
+      "lastObserved": "2026-10-11T17:32:07.381473+00:00",
+      "resolvedAt": "2026-10-11T17:32:07.381473+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -368,6 +392,14 @@
           "httpStatus": 502,
           "responseTimeMs": 3100.0,
           "errorDetails": "The simulated carrier endpoint is rejecting tracking webhooks."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:32:07.381473+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     },
@@ -377,13 +409,13 @@
       "summary": "Redis session cache timed out during token verification.",
       "service": "Authentication Service",
       "severity": "critical",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T17:30:48.018510+00:00",
-      "lastObserved": "2026-10-11T17:30:48.018510+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 500,
-      "lastResponseTimeMs": 3200.0,
-      "errorDetails": "Redis session cache timed out during token verification.",
+      "lastObserved": "2026-10-11T17:32:07.381473+00:00",
+      "resolvedAt": "2026-10-11T17:32:07.381473+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -400,6 +432,14 @@
           "httpStatus": 500,
           "responseTimeMs": 3200.0,
           "errorDetails": "Redis session cache timed out during token verification."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:32:07.381473+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     }
@@ -794,14 +834,64 @@
       "responseTimeMs": 3200.0,
       "failureKind": "http_failure",
       "errorDetails": "Redis session cache timed out during token verification."
+    },
+    {
+      "service": "Content Delivery Network",
+      "incidentId": "inc-demo-524e2a9d0ea7",
+      "observedAt": "2026-10-11T17:32:07.381473+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "Order Processing Service",
+      "incidentId": "inc-demo-ce273823b28e",
+      "observedAt": "2026-10-11T17:32:07.381473+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "User Profile Service",
+      "incidentId": "inc-demo-0833570cdf31",
+      "observedAt": "2026-10-11T17:32:07.381473+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "Shipping Logistics Service",
+      "incidentId": "inc-demo-a66c4912f853",
+      "observedAt": "2026-10-11T17:32:07.381473+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "Authentication Service",
+      "incidentId": "inc-demo-dfce714134f2",
+      "observedAt": "2026-10-11T17:32:07.381473+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
     }
   ],
   "services": [
     {
       "service": "Authentication Service",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-dfce714134f2"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "Payment Gateway",
@@ -835,27 +925,27 @@
     },
     {
       "service": "Content Delivery Network",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-524e2a9d0ea7"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "Order Processing Service",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-ce273823b28e"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "User Profile Service",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-0833570cdf31"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "Shipping Logistics Service",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-a66c4912f853"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     }
   ]
 }
