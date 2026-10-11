@@ -116,78 +116,76 @@ class Database:
                 """
             )
         if os.getenv("VERCEL"):
-            self.seed_initial_incidents_if_empty()
+            self.load_demo_snapshot()
 
 
-    def seed_initial_incidents_if_empty(self) -> None:
+    def load_demo_snapshot(self) -> None:
+        """Rebuild Vercel's ephemeral SQLite view from the versioned demo snapshot."""
+        try:
+            from backend.demo_snapshot import SNAPSHOT_JSON
+        except ImportError:
+            from demo_snapshot import SNAPSHOT_JSON
+        snapshot = json.loads(SNAPSHOT_JSON)
+
         with self.connection() as connection:
-            count = connection.execute("SELECT count(*) FROM incidents").fetchone()[0]
-            if count > 0:
-                return
-            now = iso_timestamp(utc_now())
-            sample_incidents = [
-                (
-                    "inc-auth-9021",
-                    "OAuth 2.0 Token Verification Failures",
-                    "Auth service returning HTTP 500 on token introspect due to Redis session cache timeout",
-                    "Authentication Service",
-                    "critical",
-                    "active",
-                    now,
-                    now,
-                    None,
-                    500,
-                    3200.0,
-                    "Redis connection pool timeout during session lookup",
-                ),
-                (
-                    "inc-pay-81720",
-                    "Payment Provider Upstream 504 Timeout",
-                    "Upstream credit card processor gateway timeout >5000ms",
-                    "Payment Gateway",
-                    "critical",
-                    "active",
-                    now,
-                    now,
-                    None,
-                    504,
-                    5400.0,
-                    "HTTP 504 Gateway Timeout from external acquiring bank",
-                ),
-                (
-                    "inc-srch-38190",
-                    "Search Elasticsearch Cluster High Memory & Latency",
-                    "Catalog query latency degraded to 2800ms due to unoptimized wildcard aggregations",
-                    "Catalog Search API",
-                    "high",
-                    "active",
-                    now,
-                    now,
-                    None,
-                    503,
-                    2850.0,
-                    "CircuitBreakerException: Data too large, JVM heap at 98.4%",
-                ),
-            ]
-            connection.executemany(
-                """INSERT OR IGNORE INTO incidents
-                   (id, title, summary, service, severity, status, first_detected, last_observed, resolved_at, last_http_status, last_response_time_ms, error_details)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                sample_incidents,
-            )
-            sample_events = [
-                ("inc-auth-9021", "opened", now, "Incident opened after 3 failed token validation health checks.", 500, 3200.0, "Redis connection pool timeout"),
-                ("inc-auth-9021", "failure_observed", now, "Redis cluster node failover in progress; elevated latency observed.", 500, 3100.0, "Node 10.0.4.12 unresponsive"),
-                ("inc-pay-81720", "opened", now, "Payment processing health probes exceeding 5000ms threshold.", 504, 5400.0, "Gateway timeout"),
-                ("inc-pay-81720", "failure_observed", now, "High rate of checkout drop-offs detected on credit card transactions.", 504, 5200.0, "Upstream timeout"),
-                ("inc-srch-38190", "opened", now, "Elasticsearch JVM heap memory usage spiked above 95%.", 503, 2850.0, "CircuitBreakerException"),
-            ]
-            connection.executemany(
-                """INSERT INTO incident_events
-                   (incident_id, event_type, observed_at, summary, http_status, response_time_ms, error_details)
-                   VALUES (?, ?, ?, ?, ?, ?, ?)""",
-                sample_events,
-            )
+            # Vercel instances do not share /tmp. Replaying this committed snapshot
+            # makes every cold instance serve the same client-demo state.
+            connection.execute("DELETE FROM incident_chat_messages")
+            connection.execute("DELETE FROM incident_analyses")
+            connection.execute("DELETE FROM incident_events")
+            connection.execute("DELETE FROM monitor_checks")
+            connection.execute("DELETE FROM monitor_state")
+            connection.execute("DELETE FROM incidents")
+
+            for incident in snapshot.get("incidents", []):
+                connection.execute(
+                    """INSERT INTO incidents
+                       (id, title, summary, service, severity, status, first_detected, last_observed,
+                        resolved_at, last_http_status, last_response_time_ms, error_details)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (
+                        incident["id"], incident["title"], incident["summary"], incident["service"],
+                        incident["severity"], incident["status"], incident["firstDetected"],
+                        incident["lastObserved"], incident.get("resolvedAt"), incident.get("lastHttpStatus"),
+                        incident.get("lastResponseTimeMs"), incident.get("errorDetails", ""),
+                    ),
+                )
+                for event in incident.get("events", []):
+                    connection.execute(
+                        """INSERT INTO incident_events
+                           (incident_id, event_type, observed_at, summary, http_status, response_time_ms, error_details)
+                           VALUES (?, ?, ?, ?, ?, ?, ?)""",
+                        (
+                            incident["id"], event["eventType"], event["observedAt"], event["summary"],
+                            event.get("httpStatus"), event.get("responseTimeMs"), event.get("errorDetails", ""),
+                        ),
+                    )
+
+            last_check_ids: dict[str, int] = {}
+            for check in snapshot.get("checks", []):
+                cursor = connection.execute(
+                    """INSERT INTO monitor_checks
+                       (service, incident_id, observed_at, healthy, http_status, response_time_ms, failure_kind, error_details)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (
+                        check["service"], check.get("incidentId"), check["observedAt"], int(check["healthy"]),
+                        check.get("httpStatus"), check.get("responseTimeMs"), check.get("failureKind"),
+                        check.get("errorDetails", ""),
+                    ),
+                )
+                last_check_ids[check["service"]] = int(cursor.lastrowid)
+
+            for service in snapshot.get("services", []):
+                connection.execute(
+                    """INSERT INTO monitor_state
+                       (service, consecutive_failures, last_check_id, last_status, active_incident_id)
+                       VALUES (?, ?, ?, ?, ?)""",
+                    (
+                        service["service"], service.get("consecutiveFailures", 0),
+                        last_check_ids.get(service["service"]), service.get("lastStatus", "unknown"),
+                        service.get("activeIncidentId"),
+                    ),
+                )
 
 
     def health(self) -> bool:
@@ -438,6 +436,17 @@ class Database:
                     FROM monitor_state LEFT JOIN monitor_checks ON monitor_checks.id = monitor_state.last_check_id
                     WHERE monitor_state.service = ?""",
                 (service,),
+            ).fetchone()
+        return dict(row) if row else None
+
+    def get_latest_monitor_state(self) -> dict[str, Any] | None:
+        with self.connection() as connection:
+            row = connection.execute(
+                """SELECT monitor_state.*, monitor_checks.observed_at, monitor_checks.healthy,
+                    monitor_checks.http_status, monitor_checks.response_time_ms,
+                    monitor_checks.failure_kind, monitor_checks.error_details
+                    FROM monitor_state LEFT JOIN monitor_checks ON monitor_checks.id = monitor_state.last_check_id
+                    ORDER BY monitor_checks.observed_at DESC, monitor_state.service LIMIT 1"""
             ).fetchone()
         return dict(row) if row else None
 

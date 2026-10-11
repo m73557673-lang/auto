@@ -30,7 +30,6 @@ export interface MonitoringCheck {
 
 export interface MonitoringStatus {
   enabled: boolean;
-  simulationEnabled?: boolean;
   targetConfigured: boolean;
   service: string;
   intervalSeconds: number;
@@ -114,12 +113,6 @@ async function request<T>(path: string, options: RequestInit = {}, timeoutMs = 8
 export const incidentApi = {
   health: () => request<{ status: string; database: string }>('/api/health'),
   monitoringStatus: () => request<MonitoringStatus>('/api/monitoring/status'),
-  simulateMonitoringMode: (mode: 'healthy' | 'failure') =>
-    request<{ mode: 'healthy' | 'failure'; checksRecorded: number }>('/api/monitoring/simulation', {
-      method: 'POST',
-      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ mode }),
-    }),
   services: () => request<ServiceHealth[]>('/api/services'),
   incidentCounts: () => request<{ active: number; resolved: number }>('/api/incidents/summary'),
   list: (status: 'active' | 'resolved' | 'all' = 'active', limit = 100) =>

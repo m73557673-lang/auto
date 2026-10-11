@@ -39,6 +39,28 @@ npm run dev -- --host 0.0.0.0 --port 5173
 
 Open port `5173` in GitHub Codespaces. During local development, Vite proxies `/api` requests to `127.0.0.1:8000` and reads `COMMANDER_API_TOKEN` from `backend/.env` for server-side proxy authentication. Leave `VITE_API_BASE_URL` blank in the root `.env` to use that proxy. The FastAPI schema is available at `http://localhost:8000/docs`.
 
+## Hosted client-demo simulations
+
+The hosted client demo reads synthetic incident telemetry from `backend/demo_state.json`. The Vercel backend rebuilds its temporary database from the committed snapshot, so every serverless instance shows the same incidents without provisioning a separate database. These commands create simulated data only; they do not contact or change a real service.
+
+From the repository root, use one of these commands in the Antigravity terminal:
+
+```bash
+python simulate_incidents.py health       # report healthy checks and resolve active demo incidents
+python simulate_incidents.py fail         # add one simulated failure
+python simulate_incidents.py trigger 5    # replace active demo incidents with five new incidents
+```
+
+Then publish the new snapshot:
+
+```bash
+git add backend/demo_state.json backend/demo_snapshot.py
+git commit -m "demo: update incident state"
+git push origin main
+```
+
+Vercel automatically deploys the backend update after the push. Netlify skips rebuilding the frontend for backend-only demo-data changes. The dashboard is updated at [ai-incident-commander.netlify.app](https://ai-incident-commander.netlify.app); refresh it after the Vercel deployment is ready.
+
 ## Tests and production build
 
 Run the backend tests:
