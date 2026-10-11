@@ -1,7 +1,7 @@
 {
-  "mode": "healthy",
-  "updatedAt": "2026-10-11T17:54:27.629225+00:00",
-  "nextIndex": 7,
+  "mode": "failure",
+  "updatedAt": "2026-10-11T17:55:46.428015+00:00",
+  "nextIndex": 8,
   "incidents": [
     {
       "id": "inc-demo-11aea3c51148",
@@ -680,6 +680,38 @@
           "httpStatus": 200,
           "responseTimeMs": 42.0,
           "errorDetails": ""
+        }
+      ]
+    },
+    {
+      "id": "inc-demo-62a4776ad13f",
+      "title": "Queue consumer lag exceeded threshold",
+      "summary": "The simulated order queue is backing up while consumers are unavailable.",
+      "service": "Order Processing Service",
+      "severity": "critical",
+      "status": "active",
+      "firstDetected": "2026-10-11T17:55:46.427876+00:00",
+      "lastObserved": "2026-10-11T17:55:46.427876+00:00",
+      "resolvedAt": null,
+      "lastHttpStatus": 503,
+      "lastResponseTimeMs": 7400.0,
+      "errorDetails": "The simulated order queue is backing up while consumers are unavailable.",
+      "events": [
+        {
+          "eventType": "opened",
+          "observedAt": "2026-10-11T17:55:46.427876+00:00",
+          "summary": "Incident opened after three simulated failing checks for Order Processing Service.",
+          "httpStatus": 503,
+          "responseTimeMs": 7400.0,
+          "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
+        },
+        {
+          "eventType": "failure_observed",
+          "observedAt": "2026-10-11T17:55:46.427876+00:00",
+          "summary": "Demo mode reported HTTP 503 (7400 ms).",
+          "httpStatus": 503,
+          "responseTimeMs": 7400.0,
+          "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
         }
       ]
     }
@@ -1364,6 +1396,36 @@
       "responseTimeMs": 42.0,
       "failureKind": null,
       "errorDetails": ""
+    },
+    {
+      "service": "Order Processing Service",
+      "incidentId": "inc-demo-62a4776ad13f",
+      "observedAt": "2026-10-11T17:55:46.427876+00:00",
+      "healthy": false,
+      "httpStatus": 503,
+      "responseTimeMs": 7400.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
+    },
+    {
+      "service": "Order Processing Service",
+      "incidentId": "inc-demo-62a4776ad13f",
+      "observedAt": "2026-10-11T17:55:47.427876+00:00",
+      "healthy": false,
+      "httpStatus": 503,
+      "responseTimeMs": 7400.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
+    },
+    {
+      "service": "Order Processing Service",
+      "incidentId": "inc-demo-62a4776ad13f",
+      "observedAt": "2026-10-11T17:55:48.427876+00:00",
+      "healthy": false,
+      "httpStatus": 503,
+      "responseTimeMs": 7400.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
     }
   ],
   "services": [
@@ -1411,9 +1473,9 @@
     },
     {
       "service": "Order Processing Service",
-      "consecutiveFailures": 0,
-      "lastStatus": "healthy",
-      "activeIncidentId": null
+      "consecutiveFailures": 3,
+      "lastStatus": "failing",
+      "activeIncidentId": "inc-demo-62a4776ad13f"
     },
     {
       "service": "User Profile Service",
