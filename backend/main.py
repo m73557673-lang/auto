@@ -120,6 +120,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.database = database
     app.state.monitor = monitor
     app.state.manual_check_at = 0.0
+    app.state.simulation_request_at = 0.0
     app.state.analysis_locks = {}
     app.state.analysis_locks_guard = threading.Lock()
     app.add_middleware(
@@ -164,8 +165,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/api/monitoring/status")
     def monitoring_status():
         state = database.get_monitor_state(config.service_name)
+        simulation_enabled = config.monitor_target_url is None
         return {
-            "enabled": config.monitor_enabled,
+            "enabled": config.monitor_enabled or simulation_enabled,
+            "simulationEnabled": simulation_enabled,
             "targetConfigured": config.monitor_target_url is not None,
             "service": config.service_name,
             "intervalSeconds": config.poll_interval_seconds,
@@ -174,6 +177,36 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             "status": state["last_status"] if state else "unknown",
             "lastCheck": camelize({key: state[key] for key in ("observed_at", "healthy", "http_status", "response_time_ms", "failure_kind", "error_details")}) if state else None,
         }
+
+    @app.post("/api/monitoring/simulation")
+    def simulate_monitoring_mode(payload: dict[str, str]):
+        if config.monitor_target_url is not None:
+            raise HTTPException(status_code=409, detail="Simulation controls are disabled while a real monitor target is configured")
+        mode = payload.get("mode")
+        if mode not in {"healthy", "failure"}:
+            raise HTTPException(status_code=422, detail="mode must be healthy or failure")
+        now = time.monotonic()
+        if now - app.state.simulation_request_at < 2:
+            raise HTTPException(status_code=429, detail="Simulation changes are limited to one every two seconds")
+        app.state.simulation_request_at = now
+
+        # A failure simulates enough polling intervals to exercise the configured
+        # incident threshold in one click; recovery is a single healthy check.
+        check_count = config.failure_threshold if mode == "failure" else 1
+        result = None
+        observed_at = datetime.now().astimezone()
+        for index in range(check_count):
+            check = CheckResult(
+                service=config.service_name,
+                observed_at=observed_at,
+                healthy=mode == "healthy",
+                http_status=200 if mode == "healthy" else 503,
+                response_time_ms=42.0 if mode == "healthy" else 250.0,
+                failure_kind=None if mode == "healthy" else "http_failure",
+                error_details="" if mode == "healthy" else "Simulated service failure",
+            )
+            result = database.record_check(check.as_dict(), config.failure_threshold)
+        return camelize({"mode": mode, "checksRecorded": check_count, **(result or {})})
 
     @app.post("/api/monitoring/check")
     async def manual_check(authorization: str | None = Header(default=None)):

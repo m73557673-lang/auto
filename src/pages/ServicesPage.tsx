@@ -10,6 +10,24 @@ export default function ServicesPage({ refreshKey }: { refreshKey: number }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [retry, setRetry] = useState(0);
+  const [simulationBusy, setSimulationBusy] = useState(false);
+  const [simulationMessage, setSimulationMessage] = useState<string | null>(null);
+
+  const setSimulationMode = async (nextMode: 'healthy' | 'failure') => {
+    setSimulationBusy(true);
+    setSimulationMessage(null);
+    try {
+      const result = await incidentApi.simulateMonitoringMode(nextMode);
+      setSimulationMessage(nextMode === 'failure'
+        ? `Recorded ${result.checksRecorded} simulated failures. An incident should now be open.`
+        : 'Recorded a healthy check. Any active simulated incident is resolved.');
+      setRetry((value) => value + 1);
+    } catch (requestError) {
+      setSimulationMessage(requestError instanceof Error ? requestError.message : 'Simulation mode could not be changed.');
+    } finally {
+      setSimulationBusy(false);
+    }
+  };
 
   useEffect(() => {
     let live = true;
@@ -31,7 +49,7 @@ export default function ServicesPage({ refreshKey }: { refreshKey: number }) {
   }, [refreshKey, retry]);
 
   const mode = !monitoring ? 'warn' : !monitoring.enabled || !monitoring.targetConfigured ? 'warn' : monitoring.status === 'healthy' ? 'good' : monitoring.status === 'failing' ? 'bad' : 'warn';
-  const statusTitle = !monitoring?.enabled ? 'Monitoring is disabled' : !monitoring.targetConfigured ? 'No monitor target configured' : monitoring.status === 'healthy' ? 'Target checks are healthy' : monitoring.status === 'failing' ? 'Target checks are failing' : 'Waiting for a monitoring check';
+  const statusTitle = !monitoring?.enabled ? 'Monitoring is disabled' : monitoring.simulationEnabled ? 'Demo simulation is ready' : !monitoring.targetConfigured ? 'No monitor target configured' : monitoring.status === 'healthy' ? 'Target checks are healthy' : monitoring.status === 'failing' ? 'Target checks are failing' : 'Waiting for a monitoring check';
 
   return (
     <>
@@ -53,8 +71,21 @@ export default function ServicesPage({ refreshKey }: { refreshKey: number }) {
                 <p>{monitoring?.service || 'No target service reported'} · {monitoring?.lastCheck?.observedAt ? `Last check ${formatDate(monitoring.lastCheck.observedAt)}` : 'No completed checks reported'}</p>
               </div>
             </div>
-            <span className={`monitor-badge ${mode}`}>{monitoring?.enabled ? 'Enabled' : 'Disabled'}</span>
+            <span className={`monitor-badge ${mode}`}>{monitoring?.simulationEnabled ? 'Simulation' : monitoring?.enabled ? 'Enabled' : 'Disabled'}</span>
           </section>
+
+          {monitoring?.simulationEnabled && (
+            <section className="panel panel-pad" aria-label="Demo simulation controls" style={{ marginTop: 15 }}>
+              <div className="section-heading">
+                <div><h3>Try a simulated health change</h3><p>Switch the demo service between healthy and failing. No external target is contacted.</p></div>
+                <div className="button-group">
+                  <button type="button" className="button white" disabled={simulationBusy} onClick={() => void setSimulationMode('healthy')}>Set healthy</button>
+                  <button type="button" className="button primary" disabled={simulationBusy} onClick={() => void setSimulationMode('failure')}>Simulate failure</button>
+                </div>
+              </div>
+              {simulationMessage && <p role="status" style={{ margin: '12px 0 0', color: 'var(--muted)' }}>{simulationMessage}</p>}
+            </section>
+          )}
 
           <section className="metrics-grid" aria-label="Monitoring configuration" style={{ marginTop: 15 }}>
             <article className="metric-card"><div className="metric-label"><Icon name="schedule" /> Check interval</div><div className="metric-value">{monitoring ? `${monitoring.intervalSeconds}s` : '—'}</div><p className="metric-detail">Configured interval</p></article>
