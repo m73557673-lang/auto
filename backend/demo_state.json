@@ -1,6 +1,6 @@
 {
-  "mode": "failure",
-  "updatedAt": "2026-10-11T16:36:13.489489+00:00",
+  "mode": "healthy",
+  "updatedAt": "2026-10-11T17:14:36.635456+00:00",
   "nextIndex": 5,
   "incidents": [
     {
@@ -9,13 +9,13 @@
       "summary": "Redis session cache timed out during token verification.",
       "service": "Authentication Service",
       "severity": "critical",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T16:36:13.488020+00:00",
-      "lastObserved": "2026-10-11T16:36:13.488020+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 500,
-      "lastResponseTimeMs": 3200.0,
-      "errorDetails": "Redis session cache timed out during token verification.",
+      "lastObserved": "2026-10-11T17:14:36.635399+00:00",
+      "resolvedAt": "2026-10-11T17:14:36.635399+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -32,6 +32,14 @@
           "httpStatus": 500,
           "responseTimeMs": 3200.0,
           "errorDetails": "Redis session cache timed out during token verification."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:14:36.635399+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     },
@@ -41,13 +49,13 @@
       "summary": "The simulated payment provider did not respond before the health-check timeout.",
       "service": "Payment Gateway",
       "severity": "critical",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T16:36:13.488021+00:00",
-      "lastObserved": "2026-10-11T16:36:13.488021+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 504,
-      "lastResponseTimeMs": 5800.0,
-      "errorDetails": "The simulated payment provider did not respond before the health-check timeout.",
+      "lastObserved": "2026-10-11T17:14:36.635399+00:00",
+      "resolvedAt": "2026-10-11T17:14:36.635399+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -64,6 +72,14 @@
           "httpStatus": 504,
           "responseTimeMs": 5800.0,
           "errorDetails": "The simulated payment provider did not respond before the health-check timeout."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:14:36.635399+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     },
@@ -73,13 +89,13 @@
       "summary": "Search requests are slow while the simulated cluster is under memory pressure.",
       "service": "Catalog Search API",
       "severity": "high",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T16:36:13.488022+00:00",
-      "lastObserved": "2026-10-11T16:36:13.488022+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 503,
-      "lastResponseTimeMs": 2900.0,
-      "errorDetails": "Search requests are slow while the simulated cluster is under memory pressure.",
+      "lastObserved": "2026-10-11T17:14:36.635399+00:00",
+      "resolvedAt": "2026-10-11T17:14:36.635399+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -96,6 +112,14 @@
           "httpStatus": 503,
           "responseTimeMs": 2900.0,
           "errorDetails": "Search requests are slow while the simulated cluster is under memory pressure."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:14:36.635399+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     },
@@ -105,13 +129,13 @@
       "summary": "The simulated SMTP relay rejected outbound notification requests.",
       "service": "Notification Service",
       "severity": "high",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T16:36:13.488023+00:00",
-      "lastObserved": "2026-10-11T16:36:13.488023+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 500,
-      "lastResponseTimeMs": 1150.0,
-      "errorDetails": "The simulated SMTP relay rejected outbound notification requests.",
+      "lastObserved": "2026-10-11T17:14:36.635399+00:00",
+      "resolvedAt": "2026-10-11T17:14:36.635399+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -128,6 +152,14 @@
           "httpStatus": 500,
           "responseTimeMs": 1150.0,
           "errorDetails": "The simulated SMTP relay rejected outbound notification requests."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:14:36.635399+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     },
@@ -137,13 +169,13 @@
       "summary": "Inventory reads are delayed by simulated database replica lag.",
       "service": "Inventory Management",
       "severity": "high",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T16:36:13.488024+00:00",
-      "lastObserved": "2026-10-11T16:36:13.488024+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 500,
-      "lastResponseTimeMs": 6100.0,
-      "errorDetails": "Inventory reads are delayed by simulated database replica lag.",
+      "lastObserved": "2026-10-11T17:14:36.635399+00:00",
+      "resolvedAt": "2026-10-11T17:14:36.635399+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -160,6 +192,14 @@
           "httpStatus": 500,
           "responseTimeMs": 6100.0,
           "errorDetails": "Inventory reads are delayed by simulated database replica lag."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:14:36.635399+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     }
@@ -314,38 +354,88 @@
       "responseTimeMs": 6100.0,
       "failureKind": "http_failure",
       "errorDetails": "Inventory reads are delayed by simulated database replica lag."
+    },
+    {
+      "service": "Authentication Service",
+      "incidentId": "inc-demo-11aea3c51148",
+      "observedAt": "2026-10-11T17:14:36.635399+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "Payment Gateway",
+      "incidentId": "inc-demo-fa386669cf90",
+      "observedAt": "2026-10-11T17:14:36.635399+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "Catalog Search API",
+      "incidentId": "inc-demo-a80be8d98088",
+      "observedAt": "2026-10-11T17:14:36.635399+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "Notification Service",
+      "incidentId": "inc-demo-0357b624d581",
+      "observedAt": "2026-10-11T17:14:36.635399+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "Inventory Management",
+      "incidentId": "inc-demo-8ca94d5872af",
+      "observedAt": "2026-10-11T17:14:36.635399+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
     }
   ],
   "services": [
     {
       "service": "Authentication Service",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-11aea3c51148"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "Payment Gateway",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-fa386669cf90"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "Catalog Search API",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-a80be8d98088"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "Notification Service",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-0357b624d581"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "Inventory Management",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-8ca94d5872af"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     }
   ]
 }
