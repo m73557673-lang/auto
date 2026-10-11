@@ -43,23 +43,15 @@ Open port `5173` in GitHub Codespaces. During local development, Vite proxies `/
 
 The hosted client demo reads synthetic incident telemetry from `backend/demo_state.json`. The Vercel backend rebuilds its temporary database from the committed snapshot, so every serverless instance shows the same incidents without provisioning a separate database. These commands create simulated data only; they do not contact or change a real service.
 
-From the repository root, use one of these commands in the Antigravity terminal:
+From the repository root on the `main` branch, run one command in the Antigravity terminal:
 
 ```bash
-python simulate_incidents.py health       # report healthy checks and resolve active demo incidents
+python simulate_incidents.py health       # mark healthy and resolve active demo incidents
 python simulate_incidents.py fail         # add one simulated failure
-python simulate_incidents.py trigger 5    # replace active demo incidents with five new incidents
+python simulate_incidents.py trigger 5    # create five active demo incidents
 ```
 
-Then publish the new snapshot:
-
-```bash
-git add backend/demo_state.json backend/demo_snapshot.py
-git commit -m "demo: update incident state"
-git push origin main
-```
-
-Vercel automatically deploys the backend update after the push. Netlify skips rebuilding the frontend for backend-only demo-data changes. The dashboard is updated at [ai-incident-commander.netlify.app](https://ai-incident-commander.netlify.app); refresh it after the Vercel deployment is ready.
+Each command saves the snapshot, commits only the two generated demo-state files, and pushes to `origin main`. Vercel automatically deploys the backend update; Netlify skips rebuilding the frontend for backend-only demo-data changes. Refresh [the live dashboard](https://ai-incident-commander.netlify.app) after the Vercel deployment is ready. If Git cannot commit or push, the command reports the problem and leaves the state saved locally.
 
 ## Tests and production build
 

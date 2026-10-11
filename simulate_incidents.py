@@ -3,9 +3,52 @@
 from __future__ import annotations
 
 import argparse
+import subprocess
 import sys
 
 from backend.demo_simulation import STATE_PATH, reset, set_healthy, trigger_incidents
+
+
+REPO_ROOT = STATE_PATH.parents[1]
+PUBLISH_FILES = ("backend/demo_state.json", "backend/demo_snapshot.py")
+
+
+def publish_demo_state(command: str) -> None:
+    """Commit only the generated demo state and push it to the connected deploys."""
+    def git(*args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
+        result = subprocess.run(
+            ["git", *args],
+            cwd=REPO_ROOT,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            capture_output=True,
+            check=False,
+        )
+        if check and result.returncode:
+            detail = result.stderr.strip() or result.stdout.strip()
+            raise RuntimeError(detail or f"git {' '.join(args)} failed.")
+        return result
+
+    branch = git("branch", "--show-current").stdout.strip()
+    if branch != "main":
+        raise RuntimeError(f"You are on branch '{branch or '(detached HEAD)'}'. Switch to main before publishing demo state.")
+
+    git("add", "--", *PUBLISH_FILES)
+    changed = git("diff", "--cached", "--quiet", "--", *PUBLISH_FILES, check=False)
+    if changed.returncode == 0:
+        print("The demo state is unchanged; nothing needs pushing.")
+        return
+    if changed.returncode != 1:
+        raise RuntimeError("Could not check the generated demo-state changes.")
+
+    git("commit", "-m", f"demo: publish {command} state", "--", *PUBLISH_FILES)
+    commit = git("rev-parse", "--short", "HEAD").stdout.strip()
+    print(f"Committed demo state as {commit}.")
+    git("push", "origin", "main")
+    print("Pushed to GitHub. Vercel will deploy the backend automatically.")
+    print("Refresh the live dashboard after that deployment finishes:")
+    print("  https://ai-incident-commander.netlify.app")
 
 
 def main() -> None:
@@ -39,10 +82,12 @@ def main() -> None:
         print("Demo state cleared.")
 
     print(f"\nUpdated {STATE_PATH.relative_to(STATE_PATH.parents[1])}.")
-    print("Commit and push this file to publish the demo state:")
-    print("  git add backend/demo_state.json backend/demo_snapshot.py")
-    print('  git commit -m "demo: update incident state"')
-    print("  git push origin main")
+    try:
+        publish_demo_state(args.command)
+    except (OSError, RuntimeError) as exc:
+        print(f"\nCould not publish automatically: {exc}", file=sys.stderr)
+        print("The updated state is still saved locally. Fix the issue and rerun the same command to publish it.", file=sys.stderr)
+        raise SystemExit(1) from exc
 
 
 if __name__ == "__main__":
