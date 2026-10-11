@@ -1,6 +1,6 @@
 {
-  "mode": "failure",
-  "updatedAt": "2026-10-11T17:55:46.428015+00:00",
+  "mode": "healthy",
+  "updatedAt": "2026-10-11T17:58:24.899481+00:00",
   "nextIndex": 8,
   "incidents": [
     {
@@ -689,13 +689,13 @@
       "summary": "The simulated order queue is backing up while consumers are unavailable.",
       "service": "Order Processing Service",
       "severity": "critical",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T17:55:46.427876+00:00",
-      "lastObserved": "2026-10-11T17:55:46.427876+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 503,
-      "lastResponseTimeMs": 7400.0,
-      "errorDetails": "The simulated order queue is backing up while consumers are unavailable.",
+      "lastObserved": "2026-10-11T17:58:24.899422+00:00",
+      "resolvedAt": "2026-10-11T17:58:24.899422+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -712,6 +712,14 @@
           "httpStatus": 503,
           "responseTimeMs": 7400.0,
           "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:58:24.899422+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     }
@@ -1426,6 +1434,16 @@
       "responseTimeMs": 7400.0,
       "failureKind": "http_failure",
       "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
+    },
+    {
+      "service": "Order Processing Service",
+      "incidentId": "inc-demo-62a4776ad13f",
+      "observedAt": "2026-10-11T17:58:24.899422+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
     }
   ],
   "services": [
@@ -1473,9 +1491,9 @@
     },
     {
       "service": "Order Processing Service",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-62a4776ad13f"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "User Profile Service",
