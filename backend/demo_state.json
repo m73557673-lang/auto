@@ -1,7 +1,7 @@
 {
   "mode": "failure",
-  "updatedAt": "2026-10-11T17:28:55.399543+00:00",
-  "nextIndex": 6,
+  "updatedAt": "2026-10-11T17:30:48.018720+00:00",
+  "nextIndex": 1,
   "incidents": [
     {
       "id": "inc-demo-11aea3c51148",
@@ -209,13 +209,13 @@
       "summary": "The simulated gateway is applying a restrictive global rate limit.",
       "service": "API Gateway",
       "severity": "critical",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T17:28:55.399123+00:00",
-      "lastObserved": "2026-10-11T17:28:55.399123+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 429,
-      "lastResponseTimeMs": 45.0,
-      "errorDetails": "The simulated gateway is applying a restrictive global rate limit.",
+      "lastObserved": "2026-10-11T17:30:48.018424+00:00",
+      "resolvedAt": "2026-10-11T17:30:48.018424+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -232,6 +232,174 @@
           "httpStatus": 429,
           "responseTimeMs": 45.0,
           "errorDetails": "The simulated gateway is applying a restrictive global rate limit."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:30:48.018424+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
+        }
+      ]
+    },
+    {
+      "id": "inc-demo-524e2a9d0ea7",
+      "title": "CDN edge cache propagation failure",
+      "summary": "The simulated origin shield is failing to serve fresh assets.",
+      "service": "Content Delivery Network",
+      "severity": "high",
+      "status": "active",
+      "firstDetected": "2026-10-11T17:30:48.018506+00:00",
+      "lastObserved": "2026-10-11T17:30:48.018506+00:00",
+      "resolvedAt": null,
+      "lastHttpStatus": 502,
+      "lastResponseTimeMs": 870.0,
+      "errorDetails": "The simulated origin shield is failing to serve fresh assets.",
+      "events": [
+        {
+          "eventType": "opened",
+          "observedAt": "2026-10-11T17:30:48.018506+00:00",
+          "summary": "Incident opened after three simulated failing checks for Content Delivery Network.",
+          "httpStatus": 502,
+          "responseTimeMs": 870.0,
+          "errorDetails": "The simulated origin shield is failing to serve fresh assets."
+        },
+        {
+          "eventType": "failure_observed",
+          "observedAt": "2026-10-11T17:30:48.018506+00:00",
+          "summary": "Demo mode reported HTTP 502 (870 ms).",
+          "httpStatus": 502,
+          "responseTimeMs": 870.0,
+          "errorDetails": "The simulated origin shield is failing to serve fresh assets."
+        }
+      ]
+    },
+    {
+      "id": "inc-demo-ce273823b28e",
+      "title": "Queue consumer lag exceeded threshold",
+      "summary": "The simulated order queue is backing up while consumers are unavailable.",
+      "service": "Order Processing Service",
+      "severity": "critical",
+      "status": "active",
+      "firstDetected": "2026-10-11T17:30:48.018507+00:00",
+      "lastObserved": "2026-10-11T17:30:48.018507+00:00",
+      "resolvedAt": null,
+      "lastHttpStatus": 503,
+      "lastResponseTimeMs": 7400.0,
+      "errorDetails": "The simulated order queue is backing up while consumers are unavailable.",
+      "events": [
+        {
+          "eventType": "opened",
+          "observedAt": "2026-10-11T17:30:48.018507+00:00",
+          "summary": "Incident opened after three simulated failing checks for Order Processing Service.",
+          "httpStatus": 503,
+          "responseTimeMs": 7400.0,
+          "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
+        },
+        {
+          "eventType": "failure_observed",
+          "observedAt": "2026-10-11T17:30:48.018507+00:00",
+          "summary": "Demo mode reported HTTP 503 (7400 ms).",
+          "httpStatus": 503,
+          "responseTimeMs": 7400.0,
+          "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
+        }
+      ]
+    },
+    {
+      "id": "inc-demo-0833570cdf31",
+      "title": "Document store connection pool saturated",
+      "summary": "The simulated profile store has exhausted its connection pool.",
+      "service": "User Profile Service",
+      "severity": "medium",
+      "status": "active",
+      "firstDetected": "2026-10-11T17:30:48.018508+00:00",
+      "lastObserved": "2026-10-11T17:30:48.018508+00:00",
+      "resolvedAt": null,
+      "lastHttpStatus": 500,
+      "lastResponseTimeMs": 4200.0,
+      "errorDetails": "The simulated profile store has exhausted its connection pool.",
+      "events": [
+        {
+          "eventType": "opened",
+          "observedAt": "2026-10-11T17:30:48.018508+00:00",
+          "summary": "Incident opened after three simulated failing checks for User Profile Service.",
+          "httpStatus": 500,
+          "responseTimeMs": 4200.0,
+          "errorDetails": "The simulated profile store has exhausted its connection pool."
+        },
+        {
+          "eventType": "failure_observed",
+          "observedAt": "2026-10-11T17:30:48.018508+00:00",
+          "summary": "Demo mode reported HTTP 500 (4200 ms).",
+          "httpStatus": 500,
+          "responseTimeMs": 4200.0,
+          "errorDetails": "The simulated profile store has exhausted its connection pool."
+        }
+      ]
+    },
+    {
+      "id": "inc-demo-a66c4912f853",
+      "title": "Carrier webhook delivery failures",
+      "summary": "The simulated carrier endpoint is rejecting tracking webhooks.",
+      "service": "Shipping Logistics Service",
+      "severity": "medium",
+      "status": "active",
+      "firstDetected": "2026-10-11T17:30:48.018509+00:00",
+      "lastObserved": "2026-10-11T17:30:48.018509+00:00",
+      "resolvedAt": null,
+      "lastHttpStatus": 502,
+      "lastResponseTimeMs": 3100.0,
+      "errorDetails": "The simulated carrier endpoint is rejecting tracking webhooks.",
+      "events": [
+        {
+          "eventType": "opened",
+          "observedAt": "2026-10-11T17:30:48.018509+00:00",
+          "summary": "Incident opened after three simulated failing checks for Shipping Logistics Service.",
+          "httpStatus": 502,
+          "responseTimeMs": 3100.0,
+          "errorDetails": "The simulated carrier endpoint is rejecting tracking webhooks."
+        },
+        {
+          "eventType": "failure_observed",
+          "observedAt": "2026-10-11T17:30:48.018509+00:00",
+          "summary": "Demo mode reported HTTP 502 (3100 ms).",
+          "httpStatus": 502,
+          "responseTimeMs": 3100.0,
+          "errorDetails": "The simulated carrier endpoint is rejecting tracking webhooks."
+        }
+      ]
+    },
+    {
+      "id": "inc-demo-dfce714134f2",
+      "title": "OAuth token verification failures",
+      "summary": "Redis session cache timed out during token verification.",
+      "service": "Authentication Service",
+      "severity": "critical",
+      "status": "active",
+      "firstDetected": "2026-10-11T17:30:48.018510+00:00",
+      "lastObserved": "2026-10-11T17:30:48.018510+00:00",
+      "resolvedAt": null,
+      "lastHttpStatus": 500,
+      "lastResponseTimeMs": 3200.0,
+      "errorDetails": "Redis session cache timed out during token verification.",
+      "events": [
+        {
+          "eventType": "opened",
+          "observedAt": "2026-10-11T17:30:48.018510+00:00",
+          "summary": "Incident opened after three simulated failing checks for Authentication Service.",
+          "httpStatus": 500,
+          "responseTimeMs": 3200.0,
+          "errorDetails": "Redis session cache timed out during token verification."
+        },
+        {
+          "eventType": "failure_observed",
+          "observedAt": "2026-10-11T17:30:48.018510+00:00",
+          "summary": "Demo mode reported HTTP 500 (3200 ms).",
+          "httpStatus": 500,
+          "responseTimeMs": 3200.0,
+          "errorDetails": "Redis session cache timed out during token verification."
         }
       ]
     }
@@ -466,14 +634,174 @@
       "responseTimeMs": 45.0,
       "failureKind": "http_failure",
       "errorDetails": "The simulated gateway is applying a restrictive global rate limit."
+    },
+    {
+      "service": "API Gateway",
+      "incidentId": "inc-demo-4b08c66a097c",
+      "observedAt": "2026-10-11T17:30:48.018424+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "Content Delivery Network",
+      "incidentId": "inc-demo-524e2a9d0ea7",
+      "observedAt": "2026-10-11T17:30:48.018506+00:00",
+      "healthy": false,
+      "httpStatus": 502,
+      "responseTimeMs": 870.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated origin shield is failing to serve fresh assets."
+    },
+    {
+      "service": "Content Delivery Network",
+      "incidentId": "inc-demo-524e2a9d0ea7",
+      "observedAt": "2026-10-11T17:30:49.018506+00:00",
+      "healthy": false,
+      "httpStatus": 502,
+      "responseTimeMs": 870.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated origin shield is failing to serve fresh assets."
+    },
+    {
+      "service": "Content Delivery Network",
+      "incidentId": "inc-demo-524e2a9d0ea7",
+      "observedAt": "2026-10-11T17:30:50.018506+00:00",
+      "healthy": false,
+      "httpStatus": 502,
+      "responseTimeMs": 870.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated origin shield is failing to serve fresh assets."
+    },
+    {
+      "service": "Order Processing Service",
+      "incidentId": "inc-demo-ce273823b28e",
+      "observedAt": "2026-10-11T17:30:48.018507+00:00",
+      "healthy": false,
+      "httpStatus": 503,
+      "responseTimeMs": 7400.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
+    },
+    {
+      "service": "Order Processing Service",
+      "incidentId": "inc-demo-ce273823b28e",
+      "observedAt": "2026-10-11T17:30:49.018507+00:00",
+      "healthy": false,
+      "httpStatus": 503,
+      "responseTimeMs": 7400.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
+    },
+    {
+      "service": "Order Processing Service",
+      "incidentId": "inc-demo-ce273823b28e",
+      "observedAt": "2026-10-11T17:30:50.018507+00:00",
+      "healthy": false,
+      "httpStatus": 503,
+      "responseTimeMs": 7400.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated order queue is backing up while consumers are unavailable."
+    },
+    {
+      "service": "User Profile Service",
+      "incidentId": "inc-demo-0833570cdf31",
+      "observedAt": "2026-10-11T17:30:48.018508+00:00",
+      "healthy": false,
+      "httpStatus": 500,
+      "responseTimeMs": 4200.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated profile store has exhausted its connection pool."
+    },
+    {
+      "service": "User Profile Service",
+      "incidentId": "inc-demo-0833570cdf31",
+      "observedAt": "2026-10-11T17:30:49.018508+00:00",
+      "healthy": false,
+      "httpStatus": 500,
+      "responseTimeMs": 4200.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated profile store has exhausted its connection pool."
+    },
+    {
+      "service": "User Profile Service",
+      "incidentId": "inc-demo-0833570cdf31",
+      "observedAt": "2026-10-11T17:30:50.018508+00:00",
+      "healthy": false,
+      "httpStatus": 500,
+      "responseTimeMs": 4200.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated profile store has exhausted its connection pool."
+    },
+    {
+      "service": "Shipping Logistics Service",
+      "incidentId": "inc-demo-a66c4912f853",
+      "observedAt": "2026-10-11T17:30:48.018509+00:00",
+      "healthy": false,
+      "httpStatus": 502,
+      "responseTimeMs": 3100.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated carrier endpoint is rejecting tracking webhooks."
+    },
+    {
+      "service": "Shipping Logistics Service",
+      "incidentId": "inc-demo-a66c4912f853",
+      "observedAt": "2026-10-11T17:30:49.018509+00:00",
+      "healthy": false,
+      "httpStatus": 502,
+      "responseTimeMs": 3100.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated carrier endpoint is rejecting tracking webhooks."
+    },
+    {
+      "service": "Shipping Logistics Service",
+      "incidentId": "inc-demo-a66c4912f853",
+      "observedAt": "2026-10-11T17:30:50.018509+00:00",
+      "healthy": false,
+      "httpStatus": 502,
+      "responseTimeMs": 3100.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated carrier endpoint is rejecting tracking webhooks."
+    },
+    {
+      "service": "Authentication Service",
+      "incidentId": "inc-demo-dfce714134f2",
+      "observedAt": "2026-10-11T17:30:48.018510+00:00",
+      "healthy": false,
+      "httpStatus": 500,
+      "responseTimeMs": 3200.0,
+      "failureKind": "http_failure",
+      "errorDetails": "Redis session cache timed out during token verification."
+    },
+    {
+      "service": "Authentication Service",
+      "incidentId": "inc-demo-dfce714134f2",
+      "observedAt": "2026-10-11T17:30:49.018510+00:00",
+      "healthy": false,
+      "httpStatus": 500,
+      "responseTimeMs": 3200.0,
+      "failureKind": "http_failure",
+      "errorDetails": "Redis session cache timed out during token verification."
+    },
+    {
+      "service": "Authentication Service",
+      "incidentId": "inc-demo-dfce714134f2",
+      "observedAt": "2026-10-11T17:30:50.018510+00:00",
+      "healthy": false,
+      "httpStatus": 500,
+      "responseTimeMs": 3200.0,
+      "failureKind": "http_failure",
+      "errorDetails": "Redis session cache timed out during token verification."
     }
   ],
   "services": [
     {
       "service": "Authentication Service",
-      "consecutiveFailures": 0,
-      "lastStatus": "healthy",
-      "activeIncidentId": null
+      "consecutiveFailures": 3,
+      "lastStatus": "failing",
+      "activeIncidentId": "inc-demo-dfce714134f2"
     },
     {
       "service": "Payment Gateway",
@@ -501,9 +829,33 @@
     },
     {
       "service": "API Gateway",
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
+    },
+    {
+      "service": "Content Delivery Network",
       "consecutiveFailures": 3,
       "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-4b08c66a097c"
+      "activeIncidentId": "inc-demo-524e2a9d0ea7"
+    },
+    {
+      "service": "Order Processing Service",
+      "consecutiveFailures": 3,
+      "lastStatus": "failing",
+      "activeIncidentId": "inc-demo-ce273823b28e"
+    },
+    {
+      "service": "User Profile Service",
+      "consecutiveFailures": 3,
+      "lastStatus": "failing",
+      "activeIncidentId": "inc-demo-0833570cdf31"
+    },
+    {
+      "service": "Shipping Logistics Service",
+      "consecutiveFailures": 3,
+      "lastStatus": "failing",
+      "activeIncidentId": "inc-demo-a66c4912f853"
     }
   ]
 }
