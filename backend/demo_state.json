@@ -1,7 +1,7 @@
 {
-  "mode": "healthy",
-  "updatedAt": "2026-10-11T17:32:07.381543+00:00",
-  "nextIndex": 1,
+  "mode": "failure",
+  "updatedAt": "2026-10-11T17:43:05.391802+00:00",
+  "nextIndex": 2,
   "incidents": [
     {
       "id": "inc-demo-11aea3c51148",
@@ -440,6 +440,38 @@
           "httpStatus": 200,
           "responseTimeMs": 42.0,
           "errorDetails": ""
+        }
+      ]
+    },
+    {
+      "id": "inc-demo-1b4768abd3c2",
+      "title": "Payment provider upstream timeout",
+      "summary": "The simulated payment provider did not respond before the health-check timeout.",
+      "service": "Payment Gateway",
+      "severity": "critical",
+      "status": "active",
+      "firstDetected": "2026-10-11T17:43:05.391636+00:00",
+      "lastObserved": "2026-10-11T17:43:05.391636+00:00",
+      "resolvedAt": null,
+      "lastHttpStatus": 504,
+      "lastResponseTimeMs": 5800.0,
+      "errorDetails": "The simulated payment provider did not respond before the health-check timeout.",
+      "events": [
+        {
+          "eventType": "opened",
+          "observedAt": "2026-10-11T17:43:05.391636+00:00",
+          "summary": "Incident opened after three simulated failing checks for Payment Gateway.",
+          "httpStatus": 504,
+          "responseTimeMs": 5800.0,
+          "errorDetails": "The simulated payment provider did not respond before the health-check timeout."
+        },
+        {
+          "eventType": "failure_observed",
+          "observedAt": "2026-10-11T17:43:05.391636+00:00",
+          "summary": "Demo mode reported HTTP 504 (5800 ms).",
+          "httpStatus": 504,
+          "responseTimeMs": 5800.0,
+          "errorDetails": "The simulated payment provider did not respond before the health-check timeout."
         }
       ]
     }
@@ -884,6 +916,36 @@
       "responseTimeMs": 42.0,
       "failureKind": null,
       "errorDetails": ""
+    },
+    {
+      "service": "Payment Gateway",
+      "incidentId": "inc-demo-1b4768abd3c2",
+      "observedAt": "2026-10-11T17:43:05.391636+00:00",
+      "healthy": false,
+      "httpStatus": 504,
+      "responseTimeMs": 5800.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated payment provider did not respond before the health-check timeout."
+    },
+    {
+      "service": "Payment Gateway",
+      "incidentId": "inc-demo-1b4768abd3c2",
+      "observedAt": "2026-10-11T17:43:06.391636+00:00",
+      "healthy": false,
+      "httpStatus": 504,
+      "responseTimeMs": 5800.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated payment provider did not respond before the health-check timeout."
+    },
+    {
+      "service": "Payment Gateway",
+      "incidentId": "inc-demo-1b4768abd3c2",
+      "observedAt": "2026-10-11T17:43:07.391636+00:00",
+      "healthy": false,
+      "httpStatus": 504,
+      "responseTimeMs": 5800.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated payment provider did not respond before the health-check timeout."
     }
   ],
   "services": [
@@ -895,9 +957,9 @@
     },
     {
       "service": "Payment Gateway",
-      "consecutiveFailures": 0,
-      "lastStatus": "healthy",
-      "activeIncidentId": null
+      "consecutiveFailures": 3,
+      "lastStatus": "failing",
+      "activeIncidentId": "inc-demo-1b4768abd3c2"
     },
     {
       "service": "Catalog Search API",
