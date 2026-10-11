@@ -1,6 +1,6 @@
 {
-  "mode": "failure",
-  "updatedAt": "2026-10-11T17:43:25.058499+00:00",
+  "mode": "healthy",
+  "updatedAt": "2026-10-11T17:54:27.629225+00:00",
   "nextIndex": 7,
   "incidents": [
     {
@@ -489,13 +489,13 @@
       "summary": "Search requests are slow while the simulated cluster is under memory pressure.",
       "service": "Catalog Search API",
       "severity": "high",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T17:43:25.058170+00:00",
-      "lastObserved": "2026-10-11T17:43:25.058170+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 503,
-      "lastResponseTimeMs": 2900.0,
-      "errorDetails": "Search requests are slow while the simulated cluster is under memory pressure.",
+      "lastObserved": "2026-10-11T17:54:27.629157+00:00",
+      "resolvedAt": "2026-10-11T17:54:27.629157+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -512,6 +512,14 @@
           "httpStatus": 503,
           "responseTimeMs": 2900.0,
           "errorDetails": "Search requests are slow while the simulated cluster is under memory pressure."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:54:27.629157+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     },
@@ -521,13 +529,13 @@
       "summary": "The simulated SMTP relay rejected outbound notification requests.",
       "service": "Notification Service",
       "severity": "high",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T17:43:25.058171+00:00",
-      "lastObserved": "2026-10-11T17:43:25.058171+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 500,
-      "lastResponseTimeMs": 1150.0,
-      "errorDetails": "The simulated SMTP relay rejected outbound notification requests.",
+      "lastObserved": "2026-10-11T17:54:27.629157+00:00",
+      "resolvedAt": "2026-10-11T17:54:27.629157+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -544,6 +552,14 @@
           "httpStatus": 500,
           "responseTimeMs": 1150.0,
           "errorDetails": "The simulated SMTP relay rejected outbound notification requests."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:54:27.629157+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     },
@@ -553,13 +569,13 @@
       "summary": "Inventory reads are delayed by simulated database replica lag.",
       "service": "Inventory Management",
       "severity": "high",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T17:43:25.058172+00:00",
-      "lastObserved": "2026-10-11T17:43:25.058172+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 500,
-      "lastResponseTimeMs": 6100.0,
-      "errorDetails": "Inventory reads are delayed by simulated database replica lag.",
+      "lastObserved": "2026-10-11T17:54:27.629157+00:00",
+      "resolvedAt": "2026-10-11T17:54:27.629157+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -576,6 +592,14 @@
           "httpStatus": 500,
           "responseTimeMs": 6100.0,
           "errorDetails": "Inventory reads are delayed by simulated database replica lag."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:54:27.629157+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     },
@@ -585,13 +609,13 @@
       "summary": "The simulated gateway is applying a restrictive global rate limit.",
       "service": "API Gateway",
       "severity": "critical",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T17:43:25.058173+00:00",
-      "lastObserved": "2026-10-11T17:43:25.058173+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 429,
-      "lastResponseTimeMs": 45.0,
-      "errorDetails": "The simulated gateway is applying a restrictive global rate limit.",
+      "lastObserved": "2026-10-11T17:54:27.629157+00:00",
+      "resolvedAt": "2026-10-11T17:54:27.629157+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -608,6 +632,14 @@
           "httpStatus": 429,
           "responseTimeMs": 45.0,
           "errorDetails": "The simulated gateway is applying a restrictive global rate limit."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:54:27.629157+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     },
@@ -617,13 +649,13 @@
       "summary": "The simulated origin shield is failing to serve fresh assets.",
       "service": "Content Delivery Network",
       "severity": "high",
-      "status": "active",
+      "status": "resolved",
       "firstDetected": "2026-10-11T17:43:25.058174+00:00",
-      "lastObserved": "2026-10-11T17:43:25.058174+00:00",
-      "resolvedAt": null,
-      "lastHttpStatus": 502,
-      "lastResponseTimeMs": 870.0,
-      "errorDetails": "The simulated origin shield is failing to serve fresh assets.",
+      "lastObserved": "2026-10-11T17:54:27.629157+00:00",
+      "resolvedAt": "2026-10-11T17:54:27.629157+00:00",
+      "lastHttpStatus": 200,
+      "lastResponseTimeMs": 42.0,
+      "errorDetails": "",
       "events": [
         {
           "eventType": "opened",
@@ -640,6 +672,14 @@
           "httpStatus": 502,
           "responseTimeMs": 870.0,
           "errorDetails": "The simulated origin shield is failing to serve fresh assets."
+        },
+        {
+          "eventType": "resolved",
+          "observedAt": "2026-10-11T17:54:27.629157+00:00",
+          "summary": "Demo command reported that the service recovered.",
+          "httpStatus": 200,
+          "responseTimeMs": 42.0,
+          "errorDetails": ""
         }
       ]
     }
@@ -1274,6 +1314,56 @@
       "responseTimeMs": 870.0,
       "failureKind": "http_failure",
       "errorDetails": "The simulated origin shield is failing to serve fresh assets."
+    },
+    {
+      "service": "Catalog Search API",
+      "incidentId": "inc-demo-7dd88fc5b30c",
+      "observedAt": "2026-10-11T17:54:27.629157+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "Notification Service",
+      "incidentId": "inc-demo-f99ede19e442",
+      "observedAt": "2026-10-11T17:54:27.629157+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "Inventory Management",
+      "incidentId": "inc-demo-bd280edb65f6",
+      "observedAt": "2026-10-11T17:54:27.629157+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "API Gateway",
+      "incidentId": "inc-demo-986241195483",
+      "observedAt": "2026-10-11T17:54:27.629157+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
+    },
+    {
+      "service": "Content Delivery Network",
+      "incidentId": "inc-demo-1b4c2577a193",
+      "observedAt": "2026-10-11T17:54:27.629157+00:00",
+      "healthy": true,
+      "httpStatus": 200,
+      "responseTimeMs": 42.0,
+      "failureKind": null,
+      "errorDetails": ""
     }
   ],
   "services": [
@@ -1291,33 +1381,33 @@
     },
     {
       "service": "Catalog Search API",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-7dd88fc5b30c"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "Notification Service",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-f99ede19e442"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "Inventory Management",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-bd280edb65f6"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "API Gateway",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-986241195483"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "Content Delivery Network",
-      "consecutiveFailures": 3,
-      "lastStatus": "failing",
-      "activeIncidentId": "inc-demo-1b4c2577a193"
+      "consecutiveFailures": 0,
+      "lastStatus": "healthy",
+      "activeIncidentId": null
     },
     {
       "service": "Order Processing Service",
