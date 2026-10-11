@@ -1,7 +1,7 @@
 {
-  "mode": "healthy",
-  "updatedAt": "2026-10-11T17:14:36.635456+00:00",
-  "nextIndex": 5,
+  "mode": "failure",
+  "updatedAt": "2026-10-11T17:28:55.399543+00:00",
+  "nextIndex": 6,
   "incidents": [
     {
       "id": "inc-demo-11aea3c51148",
@@ -200,6 +200,38 @@
           "httpStatus": 200,
           "responseTimeMs": 42.0,
           "errorDetails": ""
+        }
+      ]
+    },
+    {
+      "id": "inc-demo-4b08c66a097c",
+      "title": "Rate limiter policy misconfiguration",
+      "summary": "The simulated gateway is applying a restrictive global rate limit.",
+      "service": "API Gateway",
+      "severity": "critical",
+      "status": "active",
+      "firstDetected": "2026-10-11T17:28:55.399123+00:00",
+      "lastObserved": "2026-10-11T17:28:55.399123+00:00",
+      "resolvedAt": null,
+      "lastHttpStatus": 429,
+      "lastResponseTimeMs": 45.0,
+      "errorDetails": "The simulated gateway is applying a restrictive global rate limit.",
+      "events": [
+        {
+          "eventType": "opened",
+          "observedAt": "2026-10-11T17:28:55.399123+00:00",
+          "summary": "Incident opened after three simulated failing checks for API Gateway.",
+          "httpStatus": 429,
+          "responseTimeMs": 45.0,
+          "errorDetails": "The simulated gateway is applying a restrictive global rate limit."
+        },
+        {
+          "eventType": "failure_observed",
+          "observedAt": "2026-10-11T17:28:55.399123+00:00",
+          "summary": "Demo mode reported HTTP 429 (45 ms).",
+          "httpStatus": 429,
+          "responseTimeMs": 45.0,
+          "errorDetails": "The simulated gateway is applying a restrictive global rate limit."
         }
       ]
     }
@@ -404,6 +436,36 @@
       "responseTimeMs": 42.0,
       "failureKind": null,
       "errorDetails": ""
+    },
+    {
+      "service": "API Gateway",
+      "incidentId": "inc-demo-4b08c66a097c",
+      "observedAt": "2026-10-11T17:28:55.399123+00:00",
+      "healthy": false,
+      "httpStatus": 429,
+      "responseTimeMs": 45.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated gateway is applying a restrictive global rate limit."
+    },
+    {
+      "service": "API Gateway",
+      "incidentId": "inc-demo-4b08c66a097c",
+      "observedAt": "2026-10-11T17:28:56.399123+00:00",
+      "healthy": false,
+      "httpStatus": 429,
+      "responseTimeMs": 45.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated gateway is applying a restrictive global rate limit."
+    },
+    {
+      "service": "API Gateway",
+      "incidentId": "inc-demo-4b08c66a097c",
+      "observedAt": "2026-10-11T17:28:57.399123+00:00",
+      "healthy": false,
+      "httpStatus": 429,
+      "responseTimeMs": 45.0,
+      "failureKind": "http_failure",
+      "errorDetails": "The simulated gateway is applying a restrictive global rate limit."
     }
   ],
   "services": [
@@ -436,6 +498,12 @@
       "consecutiveFailures": 0,
       "lastStatus": "healthy",
       "activeIncidentId": null
+    },
+    {
+      "service": "API Gateway",
+      "consecutiveFailures": 3,
+      "lastStatus": "failing",
+      "activeIncidentId": "inc-demo-4b08c66a097c"
     }
   ]
 }
